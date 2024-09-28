@@ -1,0 +1,17 @@
+{
+    "name": "Unity.AssetBundleBrowser.Editor",
+    "references": [
+        "AssetBundlesUploader",
+        "AWS_Define"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

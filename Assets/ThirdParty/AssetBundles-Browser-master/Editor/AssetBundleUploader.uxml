@@ -1,0 +1,43 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement style="flex-grow: 0; margin-top: 5px; flex-basis: auto;">
+        <ui:Button name="BTN_Android" text="Upload Android" />
+        <ui:Button name="BTN_iOS" text="Upload iOS" />
+        <ui:Button name="BTN_Windows" text="Upload Windows" />
+        <ui:Button name="BTN_OSX" text="Upload OSX" />
+        <ui:VisualElement name="TAB_Upload" style="display: flex; visibility: visible;" />
+        <ui:VisualElement name="TAB_Setting" style="display: flex; visibility: visible;" />
+    </ui:VisualElement>
+    <ui:VisualElement style="padding-top: 5px; margin-top: 5px; border-left-color: rgba(255, 178, 0, 0.57); border-right-color: rgba(255, 178, 0, 0.57); border-top-color: rgba(255, 178, 0, 0.57); border-bottom-color: rgba(255, 178, 0, 0.57); border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px;">
+        <uie:EnumField name="ENUM_Server" label="Server" value="Center" style="justify-content: flex-start; color: rgb(255, 255, 0); margin-bottom: 3px;" />
+        <ui:VisualElement style="flex-direction: row; -unity-text-align: upper-left; white-space: normal; margin-top: 3px; margin-left: 3px;">
+            <ui:Label text="AccessKeyId" style="flex-basis: 1px; flex-grow: 1;" />
+            <ui:Label name="TXT_AccessKeyId" style="height: auto; width: auto; flex-basis: 1px; flex-grow: 3;" />
+            <ui:Button name="BTN_AccessKeyId" text="Copy" style="color: rgb(0, 255, 0); flex-grow: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-direction: row; -unity-text-align: upper-left; white-space: normal; border-top-width: 0; margin-top: 3px; margin-left: 3px;">
+            <ui:Label text="SecretAccessKey" style="flex-basis: 1px; flex-grow: 1;" />
+            <ui:Label name="TXT_SecretAccessKey" style="height: auto; width: auto; flex-basis: 1px; flex-grow: 3;" />
+            <ui:Button name="BTN_SecretAccessKey" text="Copy" style="color: rgb(0, 255, 0); flex-grow: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-direction: row; -unity-text-align: upper-left; white-space: normal; margin-top: 3px; margin-left: 3px;">
+            <ui:Label text="BucketName" style="flex-basis: 1px; flex-grow: 1;" />
+            <ui:Label name="TXT_BucketName" style="height: auto; width: auto; flex-basis: 1px; flex-grow: 3;" />
+            <ui:Button name="BTN_BucketName" text="Copy" style="color: rgb(0, 255, 0); flex-grow: 0;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-direction: row; -unity-text-align: upper-left; white-space: normal; margin-top: 3px; margin-left: 3px;">
+            <ui:Label text="RegionEndPoint" style="flex-basis: 1px; flex-grow: 1;" />
+            <ui:Label name="TXT_RegionEndPoint" style="height: auto; width: auto; flex-basis: 1px; flex-grow: 3;" />
+            <ui:Button text="Copy" style="color: rgb(0, 255, 0); flex-grow: 0; visibility: hidden;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-direction: row; -unity-text-align: upper-left; white-space: normal; margin-top: 3px; margin-left: 3px;">
+            <ui:Label text="RemotePath" style="flex-basis: 1px; flex-grow: 1;" />
+            <ui:Label name="TXT_RemotePath" style="height: auto; width: auto; flex-basis: 1px; flex-grow: 3;" />
+            <ui:Button text="Copy" style="color: rgb(0, 255, 0); flex-grow: 0; visibility: hidden;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-direction: row; -unity-text-align: upper-left; white-space: normal; margin-top: 3px; margin-left: 3px;">
+            <ui:Label text="LocalPath" style="flex-basis: 1px; flex-grow: 1;" />
+            <ui:Label name="TXT_LocalPath" style="height: auto; width: auto; flex-basis: 1px; flex-grow: 3;" />
+            <ui:Button text="Copy" style="color: rgb(0, 255, 0); flex-grow: 0; visibility: hidden;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
