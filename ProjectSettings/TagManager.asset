@@ -8,10 +8,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - World
+  - Main
   - Water
   - UI
-  - InGame
+  - 
   - 
   - 
   - 
@@ -41,7 +41,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: World
+  - name: Main
     uniqueID: 3777363631
     locked: 0
   - name: UI

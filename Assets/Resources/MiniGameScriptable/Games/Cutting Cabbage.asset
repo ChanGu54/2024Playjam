@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd47cb8d4c3de42efb2f53d283c90040, type: 3}
+  m_Name: Cutting Cabbage
+  m_EditorClassIdentifier: 
+  GameKind: 0
+  Food: 0
+  InputMethod: 0
+  Targets:
+  - Element: 0
+    AppeaeredStage: 1
+    CuttingCount: 5
+  - Element: 1
+    AppeaeredStage: 3
+    CuttingCount: 7
+  - Element: 2
+    AppeaeredStage: 5
+    CuttingCount: 10
+  - Element: 3
+    AppeaeredStage: 7
+    CuttingCount: 12
+  - Element: 4
+    AppeaeredStage: 10
+    CuttingCount: 15
+  - Element: 5
+    AppeaeredStage: 15
+    CuttingCount: 18

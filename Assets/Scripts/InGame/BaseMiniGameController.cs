@@ -43,7 +43,7 @@ public class BaseMiniGameController : MonoBehaviour
     }
 
     /// <summary>
-    /// 게임 종료 ㅈ
+    /// 게임 종료 전
     /// </summary>
     /// <param name="inEndCallback"></param>
     /// <returns></returns>

@@ -1,40 +1,18 @@
 using UnityEngine;
 
 
-namespace PlayJam.MiniGame
+namespace PlayJam.InGame
 {
-    [CreateAssetMenu(fileName = "MiniGame", menuName = "PlayJam/Scriptable Object/¹Ì´Ï°ÔÀÓ ÆÄÀÏ »ı¼º", order = int.MaxValue)]
-    public class MiniGame : ScriptableObject
+    //[CreateAssetMenu(fileName = "MiniGame", menuName = "PlayJam/Scriptable Object/MiniGames.", order = int.MaxValue)]
+    public class MiniGameData : ScriptableObject
     {
-        [Header("°ÔÀÓ Á¾·ù")]
+        [Header("ë¯¸ë‹ˆê²Œì„ ì¢…ë¥˜")]
         public EMiniGame GameKind;
 
-        [Header("À½½Ä")]
+        [Header("ëŒ€ì‘ë˜ëŠ” ìŒì‹")]
         public EFood Food;
 
-        [Header("°ª1")]
-        public float Value1;
-
-        [Header("°ª1_¼³¸í")]
-        public string Value1_Desc;
-
-        [Header("°ª2")]
-        public float Value2;
-
-        [Header("°ª2_¼³¸í")]
-        public string Value2_Desc;
-
-        [Header("°ª3")]
-        public float Value3;
-
-        [Header("°ª3_¼³¸í")]
-        public string Value3_Desc;
-
-        [Header("³­ÀÌµµ¿¡ µû¸¥ Áõ°¡°ª")]
-        public float Value1_Increase_Rate;
-
-        public float Value2_Increase_Rate;
-
-        public float Value3_Increase_Rate;
+        [Header("ì…ë ¥ ë°©ì‹")]
+        public EInputMethod InputMethod;
     }
 }
