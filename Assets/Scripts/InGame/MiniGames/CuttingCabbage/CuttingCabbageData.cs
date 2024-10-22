@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static PlayJam.InGame.CuttingCabbageData;
 
-namespace PlayJam.InGame
+namespace PlayJam.InGame.CuttingCabbage
 {
     [CreateAssetMenu(fileName = "MiniGame", menuName = "PlayJam/Scriptable Object/MiniGames/양배추 자르기(CuttingCabbage)", order = int.MaxValue)]
     public class CuttingCabbageData : MiniGameData
@@ -51,7 +50,7 @@ namespace PlayJam.InGame
     public class CuttingCabbageTarget
     {
         [Header("자를 대상")]
-        public EElement Element;
+        public CuttingCabbageData.EElement Element;
 
         [Header("등장하는 스테이지 (최소)")]
         public int AppeaeredStage;

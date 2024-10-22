@@ -51,7 +51,7 @@ namespace PlayJam.InGame.UI
 
             while (fillAnount < 1)
             {
-                fillAnount = Mathf.Min(1, 1 - MiniGameSharedData.Instance.LeftTime / MiniGameSharedData.Instance.Config.PlayTime);
+                fillAnount = Mathf.Min(1, 1 - MiniGameSharedData.Instance.LeftTime / MiniGameSharedData.Instance.CurStageTime);
                 _imgFill.fillAmount = fillAnount;
                 yield return null;
             }

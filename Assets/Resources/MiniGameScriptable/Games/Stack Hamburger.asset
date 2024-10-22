@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b70382bf2e2b4a0a8402e3071a23c99, type: 3}
+  m_Name: Stack Hamburger
+  m_EditorClassIdentifier: 
+  GameKind: 1
+  Food: 1
+  InputMethod: 1
+  Targets:
+  - Element: 0
+    DropTIme: 2
+  - Element: 1
+    DropTIme: 1
+  - Element: 2
+    DropTIme: 2.5
+  - Element: 3
+    DropTIme: 2
+  - Element: 4
+    DropTIme: 1

@@ -20,16 +20,16 @@ MonoBehaviour:
     AppeaeredStage: 1
     CuttingCount: 5
   - Element: 1
-    AppeaeredStage: 3
+    AppeaeredStage: 2
     CuttingCount: 7
   - Element: 2
-    AppeaeredStage: 5
+    AppeaeredStage: 3
     CuttingCount: 10
   - Element: 3
-    AppeaeredStage: 7
+    AppeaeredStage: 4
     CuttingCount: 12
   - Element: 4
-    AppeaeredStage: 10
+    AppeaeredStage: 5
     CuttingCount: 15
   - Element: 5
     AppeaeredStage: 15

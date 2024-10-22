@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using utils;
 
@@ -20,6 +21,8 @@ namespace PlayJam.InGame
 
         public int StageCount;
 
+        public float CurStageTime;
+
         public float LeftTime;
 
         public int HeartCount;
@@ -30,12 +33,19 @@ namespace PlayJam.InGame
 
         public MiniGameData CurrentMiniGameData;
 
+        private bool _isTestGame;
+
+        private EMiniGame _testMiniGameKind;
+
         /// <summary>
         /// 초기화
         /// </summary>
-        public void Initialize(MiniGameConfig inConfig, List<MiniGameData> inAllMiniGames)
+        public void Initialize(MiniGameConfig inConfig, List<MiniGameData> inAllMiniGames, bool isTestGame, EMiniGame inTestGameKind)
         {
             Config = inConfig;
+
+            _isTestGame = isTestGame;
+            _testMiniGameKind = inTestGameKind;
 
             float curRatio = (float)Screen.width / Screen.height;
             float baseRatio = 720 / 1280f;
@@ -64,15 +74,22 @@ namespace PlayJam.InGame
         {
             while (ReservedMiniGameDatas.Count <= inTotalElectedCnt)
             {
-                MiniGameData miniGameElected = AllMiniGameDatas[Random.Range(0, AllMiniGameDatas.Count)];
+                MiniGameData miniGameElected = null;
+
+                if (_isTestGame == true)
+                    miniGameElected = AllMiniGameDatas.Where(x => x.GameKind == _testMiniGameKind).FirstOrDefault();
+                else
+                    miniGameElected = AllMiniGameDatas[Random.Range(0, AllMiniGameDatas.Count)];
+
                 ReservedMiniGameDatas.Add(miniGameElected);
             }
         }
 
         public void OnMiniGamePrevStart()
         {
-            LeftTime = Config.PlayTime;
-            Debug.Log($"MiniGameSharedData.OnMiniGamePrevStart : {LeftTime}");
+            CurStageTime = Mathf.Max(Config.MinimumPlayTime, Config.PlayTime - Config.DecresedPlayTimePerRound * (StageCount - 1));
+            LeftTime = CurStageTime;
+            Debug.Log($"MiniGameSharedData.OnMiniGamePrevStart : {CurStageTime}");
         }
 
         public void OnMiniGameStart()

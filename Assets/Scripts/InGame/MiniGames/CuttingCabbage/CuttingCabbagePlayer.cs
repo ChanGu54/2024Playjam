@@ -3,11 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using static PlayJam.InGame.CuttingCabbageData;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
-using Cysharp.Threading.Tasks;
-using System.Threading.Tasks;
 
 namespace PlayJam.InGame.CuttingCabbage
 {
@@ -19,7 +16,7 @@ namespace PlayJam.InGame.CuttingCabbage
     {
         public Transform Transform;
         public SpriteRenderer SpriteRend;
-        public EElement Element;
+        public CuttingCabbageData.EElement Element;
         public List<Rigidbody2D> RBParticles;
     }
 

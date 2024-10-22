@@ -18,6 +18,13 @@ namespace PlayJam.InGame
         /// </summary>
         private List<BaseMiniGameController> _controllers;
 
+        [Header("특정 게임만 테스트할 때 사용")]
+        [SerializeField]
+        private bool _isTesting = false;
+
+        [SerializeField]
+        private EMiniGame _testTarget;
+
         /// <summary>
         /// 
         /// </summary>
@@ -46,7 +53,7 @@ namespace PlayJam.InGame
         /// </summary>
         public IEnumerator Co_StartGame()
         {
-            MiniGameSharedData.Instance.Initialize(_miniGameConfig, _miniGames);
+            MiniGameSharedData.Instance.Initialize(_miniGameConfig, _miniGames, _isTesting, _testTarget);
             OnMiniGamePrevStart = new UnityEvent();
             OnMiniGameStart = new UnityEvent();
             OnMiniGamePostStart = new UnityEvent();

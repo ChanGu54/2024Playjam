@@ -43,9 +43,12 @@ namespace PlayJam.InGame
 
         private IEnumerator Co_OnMiniGamePrevStart()
         {
+            yield return new WaitForSeconds(2f);
+
             if (_pickedMiniGame != null)
             {
                 _pickedMiniGame.MiniGameInstance.Clear();
+                _pickedMiniGame.MiniGameInstance.gameObject.SetActive(false);
                 _pickedMiniGame = null;
             }
 
@@ -59,8 +62,6 @@ namespace PlayJam.InGame
 
             _pickedMiniGame.MiniGameInstance.gameObject.SetActive(true);
             _pickedMiniGame.MiniGameInstance.Initialize(MiniGameSharedData.Instance.CurrentMiniGameData);
-
-            yield return new WaitForSeconds(2f);
 
             MiniGameManager.OnMiniGameStart.Invoke();
         }
