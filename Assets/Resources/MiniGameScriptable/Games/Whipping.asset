@@ -17,3 +17,4 @@ MonoBehaviour:
   InputMethod: 1
   WhippingCount: 10
   IncreaseCountPerStageCount: 1
+  CheckpointCorrection: 40

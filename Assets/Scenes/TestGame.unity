@@ -4287,7 +4287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPlaying: 0
   _trWhip: {fileID: 1442636269}
-  _trCenter: {fileID: 2131997720}
+  _trWhipCenter: {fileID: 2131997720}
   _whipLevelObjs:
   - {fileID: 788013655}
   - {fileID: 1834185539}

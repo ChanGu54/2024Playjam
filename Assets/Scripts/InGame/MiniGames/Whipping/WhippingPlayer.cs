@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using PlayJam.Character;
 using static UnityEngine.EventSystems.EventTrigger;
+using System;
 
 namespace PlayJam.InGame.Whipping
 {
@@ -16,7 +17,7 @@ namespace PlayJam.InGame.Whipping
         private Transform _trWhip;
 
         [SerializeField]
-        private Transform _trCenter;
+        private Transform _trWhipCenter;
 
         [SerializeField]
         private List<GameObject> _whipLevelObjs;
@@ -30,6 +31,8 @@ namespace PlayJam.InGame.Whipping
         private float radiusX = 62f;
 
         private float radiusY = 32f;
+
+        private Vector3 _vecCenter;
 
         public override void Clear()
         {
@@ -93,15 +96,25 @@ namespace PlayJam.InGame.Whipping
             float radians = angle * Mathf.Deg2Rad;
 
             // 타원의 테두리 좌표 계산
-            float x = _trCenter.position.x + radiusX * Mathf.Cos(radians);
-            float y = _trCenter.position.y + radiusY * Mathf.Sin(radians);
+            float x = _trWhipCenter.position.x + radiusX * Mathf.Cos(radians);
+            float y = _trWhipCenter.position.y + radiusY * Mathf.Sin(radians);
 
             return new Vector3(x, y, 0f);
         }
 
         Vector3 _touchStartPos = Vector3.zero;
+
         float _cachedStartAngle = 0;
         float _cachedCurAngle = 0;
+
+        float _arriveMinAngle = 0;
+        float _arriveMaxAngle = 0;
+
+        float _checkpointAngle = 0;
+        float _checkpointMinAngle = 0;
+        float _checkpointMaxAngle = 0;
+
+        bool _isCheckpointReached = false;
 
         public float GetAngleBetweenNormals(Vector2 center, Vector2 point1, Vector2 point2)
         {
@@ -114,13 +127,18 @@ namespace PlayJam.InGame.Whipping
             // 두 법선 벡터 사이의 각도 계산
             float angle = Vector2.Angle(normal1, normal2);
 
-            if (vector2.y < vector1.y)
+            if (vector2.y > vector1.y)
                 angle = 360 - angle;
-
-            Debug.LogError($"{center}, {vector1}, {vector2}, {angle}");
 
             // 각도의 절대값을 반환 (항상 양수)
             return angle;
+        }
+
+        public override IEnumerator OnSuccess(Action inCallback)
+        {
+            yield return new WaitForSeconds(1f);
+
+            yield return base.OnSuccess(inCallback);
         }
 
         /// <summary>
@@ -129,6 +147,11 @@ namespace PlayJam.InGame.Whipping
         private void Update()
         {
             if (IsPlaying == false)
+            {
+                return;
+            }
+
+            if (_currentSpinCount >= _requireSpinCount)
             {
                 return;
             }
@@ -162,7 +185,15 @@ namespace PlayJam.InGame.Whipping
             if (touch.phase == TouchPhase.Began)
             {
                 _touchStartPos = pos;
-                _cachedCurAngle = 0;
+                _vecCenter = new Vector2(0, _touchStartPos.y - 200);
+                _cachedStartAngle = GetAngleBetweenNormals(_vecCenter, _touchStartPos, _vecCenter + Vector3.right);
+                _arriveMinAngle = _arriveMinAngle - _config.CheckpointCorrection < 0 ? _arriveMinAngle - _config.CheckpointCorrection + 360 : _arriveMinAngle - _config.CheckpointCorrection;
+                _arriveMaxAngle = _arriveMinAngle + _config.CheckpointCorrection > 360 ? _arriveMinAngle + _config.CheckpointCorrection - 360 : _arriveMinAngle + _config.CheckpointCorrection;
+
+                _checkpointAngle = (_cachedStartAngle + 180) % 360;
+
+                _checkpointMinAngle = _checkpointAngle - _config.CheckpointCorrection < 0 ? _checkpointAngle - _config.CheckpointCorrection + 360 : _checkpointAngle - _config.CheckpointCorrection;
+                _checkpointMaxAngle = _checkpointAngle + _config.CheckpointCorrection > 360 ? _checkpointAngle + _config.CheckpointCorrection - 360 : _checkpointAngle + _config.CheckpointCorrection;
                 return;
             }
             else if (touch.phase == TouchPhase.Moved)
@@ -170,9 +201,51 @@ namespace PlayJam.InGame.Whipping
                 if (_touchStartPos == Vector3.zero)
                     _touchStartPos = pos;
 
-                float angle = GetAngleBetweenNormals(new Vector2(_trCenter.position.x, _trCenter.position.y), _touchStartPos, pos);
-                Vector3 whipPos = GetEllipsePointAtAngle(angle);
+                _cachedCurAngle = GetAngleBetweenNormals(new Vector2(_vecCenter.x, _vecCenter.y), pos, _vecCenter + Vector3.right);
+                Vector3 whipPos = GetEllipsePointAtAngle(_cachedCurAngle);
                 _trWhip.transform.localPosition = whipPos;
+
+                if (_isCheckpointReached == false && _checkpointMinAngle < _cachedCurAngle && _checkpointMaxAngle > _cachedCurAngle)
+                {
+                    _isCheckpointReached = true;
+                    Debug.Log("체크포인트 도달");
+                }
+
+                if (_isCheckpointReached == true && _arriveMinAngle < _cachedCurAngle && _arriveMaxAngle > _cachedCurAngle)
+                {
+                    _isCheckpointReached = false;
+                    _currentSpinCount++;
+
+                    Debug.Log($"{_currentSpinCount}, {_requireSpinCount}");
+
+                    int activeVisualIdx = 0;
+
+                    for (int i = _whipLevelObjs.Count - 1; i >= 0; i--)
+                    {
+                        if ((float)_currentSpinCount / _requireSpinCount >= (float)i / (_whipLevelObjs.Count - 1))
+                        {
+                            activeVisualIdx = i;
+                            break;
+                        }
+                    }
+
+                    for (int i = 0; i < _whipLevelObjs.Count; i++)
+                    {
+                        _whipLevelObjs[i].SetActive(activeVisualIdx == i);
+                    }
+
+                    if (_currentSpinCount >= _requireSpinCount)
+                    {
+                        // 일단 미니게임 일시정지
+                        MiniGameManager.OnMiniGamePause.Invoke();
+
+                        // 연출 보여줄거면 보여주고 게임 종료
+                        StartCoroutine(OnSuccess(() => MiniGameManager.OnMiniGameEnd.Invoke(true)));
+                        return;
+                    }
+
+
+                }
             }
         }
     }
