@@ -14,4 +14,9 @@ public enum EMiniGame
     /// 휘핑 하기
     /// </summary>
     Whipping,
+
+    /// <summary>
+    /// 타코야끼 요리하기
+    /// </summary>
+    CookTakoyaki,
 }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd47cb8d4c3de42efb2f53d283c90040, type: 3}
-  m_Name: Cutting Cabbage
+  m_Name: CuttingCabbage
   m_EditorClassIdentifier: 
   GameKind: 0
   Food: 0

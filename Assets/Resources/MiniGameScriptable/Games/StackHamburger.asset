@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b70382bf2e2b4a0a8402e3071a23c99, type: 3}
-  m_Name: Stack Hamburger
+  m_Name: StackHamburger
   m_EditorClassIdentifier: 
   GameKind: 1
   Food: 1

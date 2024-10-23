@@ -14,4 +14,9 @@ public enum EFood
     /// 컵케익
     /// </summary>
     CupCake,
+
+    /// <summary>
+    /// 타코야키
+    /// </summary>
+    Takoyaki,
 }
