@@ -185,21 +185,41 @@ namespace PlayJam.InGame.Whipping
             if (touch.phase == TouchPhase.Began)
             {
                 _touchStartPos = pos;
-                _vecCenter = new Vector2(0, _touchStartPos.y - 200);
-                _cachedStartAngle = GetAngleBetweenNormals(_vecCenter, _touchStartPos, _vecCenter + Vector3.right);
-                _arriveMinAngle = _arriveMinAngle - _config.CheckpointCorrection < 0 ? _arriveMinAngle - _config.CheckpointCorrection + 360 : _arriveMinAngle - _config.CheckpointCorrection;
-                _arriveMaxAngle = _arriveMinAngle + _config.CheckpointCorrection > 360 ? _arriveMinAngle + _config.CheckpointCorrection - 360 : _arriveMinAngle + _config.CheckpointCorrection;
-
-                _checkpointAngle = (_cachedStartAngle + 180) % 360;
-
-                _checkpointMinAngle = _checkpointAngle - _config.CheckpointCorrection < 0 ? _checkpointAngle - _config.CheckpointCorrection + 360 : _checkpointAngle - _config.CheckpointCorrection;
-                _checkpointMaxAngle = _checkpointAngle + _config.CheckpointCorrection > 360 ? _checkpointAngle + _config.CheckpointCorrection - 360 : _checkpointAngle + _config.CheckpointCorrection;
+                _vecCenter = Vector3.zero;
                 return;
             }
             else if (touch.phase == TouchPhase.Moved)
             {
                 if (_touchStartPos == Vector3.zero)
                     _touchStartPos = pos;
+
+                if (_vecCenter == Vector3.zero)
+                {
+                    int centerWeight = 0;
+
+                    if (pos.y > _touchStartPos.y)
+                    {
+                        centerWeight = 200;
+                    }
+                    else if (pos.y < _touchStartPos.y)
+                    {
+                        centerWeight = -200;
+                    }
+                    else
+                    {
+                        return;
+                    }
+
+                    _vecCenter = new Vector2(0, _touchStartPos.y + centerWeight);
+                    _cachedStartAngle = GetAngleBetweenNormals(_vecCenter, _touchStartPos, _vecCenter + Vector3.right);
+                    _arriveMinAngle = _arriveMinAngle - _config.CheckpointCorrection < 0 ? _arriveMinAngle - _config.CheckpointCorrection + 360 : _arriveMinAngle - _config.CheckpointCorrection;
+                    _arriveMaxAngle = _arriveMinAngle + _config.CheckpointCorrection > 360 ? _arriveMinAngle + _config.CheckpointCorrection - 360 : _arriveMinAngle + _config.CheckpointCorrection;
+
+                    _checkpointAngle = (_cachedStartAngle + 180) % 360;
+
+                    _checkpointMinAngle = _checkpointAngle - _config.CheckpointCorrection < 0 ? _checkpointAngle - _config.CheckpointCorrection + 360 : _checkpointAngle - _config.CheckpointCorrection;
+                    _checkpointMaxAngle = _checkpointAngle + _config.CheckpointCorrection > 360 ? _checkpointAngle + _config.CheckpointCorrection - 360 : _checkpointAngle + _config.CheckpointCorrection;
+                }
 
                 _cachedCurAngle = GetAngleBetweenNormals(new Vector2(_vecCenter.x, _vecCenter.y), pos, _vecCenter + Vector3.right);
                 Vector3 whipPos = GetEllipsePointAtAngle(_cachedCurAngle);
