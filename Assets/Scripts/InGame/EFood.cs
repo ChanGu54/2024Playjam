@@ -19,4 +19,9 @@ public enum EFood
     /// 타코야키
     /// </summary>
     Takoyaki,
+
+    /// <summary>
+    /// 볶음밥
+    /// </summary>
+    FriedRice,
 }

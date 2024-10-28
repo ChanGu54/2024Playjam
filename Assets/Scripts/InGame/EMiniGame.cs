@@ -19,4 +19,9 @@ public enum EMiniGame
     /// 타코야끼 요리하기
     /// </summary>
     CookTakoyaki,
+
+    /// <summary>
+    /// 볶음밥 만들기
+    /// </summary>
+    StirFriedRice,
 }

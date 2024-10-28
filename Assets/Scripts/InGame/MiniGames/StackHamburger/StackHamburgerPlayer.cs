@@ -151,7 +151,7 @@ namespace PlayJam.InGame.StackHamburger
         /// <returns></returns>
         public override IEnumerator OnStart()
         {
-            _mainCharacter.ChangeAddOn(EAddOn.Hamburger);
+            _mainCharacter.ChangeAddOn(EAddOn.HAMBURGER);
             _mainCharacter.transform.position = new Vector3(0, -460, 0);
 
             yield return null;

@@ -9,6 +9,8 @@ namespace PlayJam.Character
     {
         IDLE,
         HAMBURGER,
+        FRIEDRICE_STIR_SUCCESS,
+        FRIEDRICE_STIR_FAIL,
     }
 
     public enum EHat
@@ -19,7 +21,8 @@ namespace PlayJam.Character
     public enum EAddOn
     {
         IDLE,
-        Hamburger,
+        HAMBURGER,
+        PAN,
     }
 
     public enum EEmotion
