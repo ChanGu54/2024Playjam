@@ -24,4 +24,9 @@ public enum EFood
     /// 볶음밥
     /// </summary>
     FriedRice,
+
+    /// <summary>
+    /// 화채
+    /// </summary>
+    Hwachae
 }

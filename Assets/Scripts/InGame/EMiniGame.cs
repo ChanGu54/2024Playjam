@@ -24,4 +24,9 @@ public enum EMiniGame
     /// 볶음밥 만들기
     /// </summary>
     StirFriedRice,
+
+    /// <summary>
+    /// 과일 자르기
+    /// </summary>
+    CuttingFruit,
 }
