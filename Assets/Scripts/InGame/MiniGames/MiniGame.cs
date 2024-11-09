@@ -42,6 +42,7 @@ namespace PlayJam.InGame
         public virtual IEnumerator OnFail(Action inCallback)
         {
             yield return null;
+            IsPlaying = false;
             inCallback?.Invoke();
         }
 

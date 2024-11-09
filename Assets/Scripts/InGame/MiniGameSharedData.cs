@@ -17,11 +17,13 @@ namespace PlayJam.InGame
 
         public Vector2 LeftTopPos;
 
-        private Vector2 RightBottomPos;
+        public Vector2 RightBottomPos;
 
         public int StageCount;
 
         public float CurStageTime;
+
+        public float SpendTime { get => CurStageTime - LeftTime; }
 
         public float LeftTime;
 

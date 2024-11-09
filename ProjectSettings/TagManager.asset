@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ingredient
   - Character
+  - Touch
   layers:
   - Default
   - TransparentFX
