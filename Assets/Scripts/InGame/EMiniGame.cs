@@ -34,4 +34,9 @@ public enum EMiniGame
     /// 만두피 만들기
     /// </summary>
     MakeDumplingSkin,
+
+    /// <summary>
+    /// 양배추 떼기
+    /// </summary>
+    PickingCabbage,
 }

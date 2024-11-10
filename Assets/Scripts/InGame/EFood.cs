@@ -34,4 +34,9 @@ public enum EFood
     /// 만두
     /// </summary>
     Dumpling,
+
+    /// <summary>
+    /// 양배추
+    /// </summary>
+    Cabbage,
 }
