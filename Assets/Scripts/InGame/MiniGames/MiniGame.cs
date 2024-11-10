@@ -35,14 +35,15 @@ namespace PlayJam.InGame
 
         public virtual IEnumerator OnSuccess(Action inCallback)
         {
+            IsPlaying = false;
             yield return null;
             inCallback?.Invoke();
         }
 
         public virtual IEnumerator OnFail(Action inCallback)
         {
-            yield return null;
             IsPlaying = false;
+            yield return null;
             inCallback?.Invoke();
         }
 

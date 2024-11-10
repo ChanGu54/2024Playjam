@@ -28,5 +28,10 @@ public enum EFood
     /// <summary>
     /// 화채
     /// </summary>
-    Hwachae
+    Hwachae,
+
+    /// <summary>
+    /// 만두
+    /// </summary>
+    Dumpling,
 }

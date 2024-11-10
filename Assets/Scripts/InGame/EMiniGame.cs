@@ -29,4 +29,9 @@ public enum EMiniGame
     /// 과일 자르기
     /// </summary>
     CuttingFruit,
+
+    /// <summary>
+    /// 만두피 만들기
+    /// </summary>
+    MakeDumplingSkin,
 }
