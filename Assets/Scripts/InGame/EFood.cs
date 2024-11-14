@@ -39,4 +39,9 @@ public enum EFood
     /// 양배추
     /// </summary>
     Cabbage,
+
+    /// <summary>
+    /// 티라미수
+    /// </summary>
+    Tiramisu,
 }

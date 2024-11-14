@@ -388,7 +388,7 @@ SpriteRenderer:
   m_Size: {x: 1280, y: 1012}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &81998220
@@ -1388,7 +1388,7 @@ SpriteRenderer:
   m_Size: {x: 1280, y: 1012}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &644658453
@@ -1730,6 +1730,7 @@ Transform:
   - {fileID: 1663338210399912779}
   - {fileID: 6115723091964937810}
   - {fileID: 8420370017455558770}
+  - {fileID: 4844575792749405852}
   m_Father: {fileID: 1515136201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!210 &878490034
@@ -2702,7 +2703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isTesting: 1
-  _testTarget: 7
+  _testTarget: 8
   _miniGameConfig: {fileID: 11400000, guid: 2cb5eff4084424e008039833f0f2ae56, type: 2}
   _miniGames:
   - {fileID: 11400000, guid: a15f47244fb16944a94849db5c570f77, type: 2}
@@ -2713,6 +2714,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 72c61ffb029aa4741850465a8e8bc77e, type: 2}
   - {fileID: 11400000, guid: 3f899efd924b445c1a90efbfd103450b, type: 2}
   - {fileID: 11400000, guid: 2f3b7927922fc465ebb11e8837df1457, type: 2}
+  - {fileID: 11400000, guid: fbfa185601899ee4eaeee7d4234b5e2a, type: 2}
 --- !u!4 &1515136201
 Transform:
   m_ObjectHideFlags: 0
@@ -2801,6 +2803,8 @@ MonoBehaviour:
     MiniGameInstance: {fileID: 6115723091964937811}
   - MiniGameKind: 7
     MiniGameInstance: {fileID: 8420370017455558771}
+  - MiniGameKind: 8
+    MiniGameInstance: {fileID: 1558896768151354231}
 --- !u!1 &1568525135
 GameObject:
   m_ObjectHideFlags: 0
@@ -2916,7 +2920,7 @@ SpriteRenderer:
   m_Size: {x: 1280, y: 1012}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1675033267
@@ -3047,7 +3051,7 @@ SpriteRenderer:
   m_Size: {x: 1280, y: 1012}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1772215635 stripped
@@ -3453,6 +3457,78 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f0385a40d4b647be81486eaf4a4d6df, type: 3}
+--- !u!1001 &1558896768151354230
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 878490033}
+    m_Modifications:
+    - target: {fileID: 359279727772987754, guid: e7f9e34b1073c464496f8e558876c925, type: 3}
+      propertyPath: m_Name
+      value: SprinkleCocoaPowder
+      objectReference: {fileID: 0}
+    - target: {fileID: 359279727772987754, guid: e7f9e34b1073c464496f8e558876c925, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886336562612597746, guid: e7f9e34b1073c464496f8e558876c925, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886336562612597746, guid: e7f9e34b1073c464496f8e558876c925, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886336562612597746, guid: e7f9e34b1073c464496f8e558876c925, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886336562612597746, guid: e7f9e34b1073c464496f8e558876c925, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886336562612597746, guid: e7f9e34b1073c464496f8e558876c925, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886336562612597746, guid: e7f9e34b1073c464496f8e558876c925, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886336562612597746, guid: e7f9e34b1073c464496f8e558876c925, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886336562612597746, guid: e7f9e34b1073c464496f8e558876c925, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886336562612597746, guid: e7f9e34b1073c464496f8e558876c925, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886336562612597746, guid: e7f9e34b1073c464496f8e558876c925, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e7f9e34b1073c464496f8e558876c925, type: 3}
+--- !u!114 &1558896768151354231 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2763739144546924609, guid: e7f9e34b1073c464496f8e558876c925, type: 3}
+  m_PrefabInstance: {fileID: 1558896768151354230}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62e29cf75688a9a4e97e8756bd9cc4ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1663338210399912779 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7244485553037558044, guid: d86d08fb9088e40048ebc9399f916941, type: 3}
@@ -3777,6 +3853,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d86d08fb9088e40048ebc9399f916941, type: 3}
+--- !u!4 &4844575792749405852 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4886336562612597746, guid: e7f9e34b1073c464496f8e558876c925, type: 3}
+  m_PrefabInstance: {fileID: 1558896768151354230}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5272388487937153799
 PrefabInstance:
   m_ObjectHideFlags: 0

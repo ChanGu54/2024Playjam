@@ -39,4 +39,9 @@ public enum EMiniGame
     /// 양배추 떼기
     /// </summary>
     PickingCabbage,
+
+    /// <summary>
+    /// 코코아 파우더 뿌리기
+    /// </summary>
+    SprinkleCocoaPowder,
 }
