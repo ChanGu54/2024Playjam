@@ -5,6 +5,23 @@ using UnityEngine;
 
 namespace PlayJam.Character
 {
+    public enum ECostume
+    {
+        IDLE,
+        BEAR,
+        CAT,
+        CHEF,
+        COOLCHEF,
+        CUTE,
+        FAIRY,
+        FLOWER,
+        HONEYBEE,
+        MICHELIN,
+        TOMATO,
+        WAITER,
+        WHITECHEF,
+    }
+
     public enum EAnim
     {
         IDLE,
@@ -16,6 +33,15 @@ namespace PlayJam.Character
     public enum EHat
     {
         IDLE,
+        BEAR,
+        CAT,
+        CHEF,
+        COOLCHEF,
+        CUTE,
+        FAIRY,
+        FLOWER,
+        HONEYBEE,
+        TOMATO,
     }
 
     public enum EAddOn
@@ -23,6 +49,10 @@ namespace PlayJam.Character
         IDLE,
         HAMBURGER,
         PAN,
+        SPOON,
+        COOLCHEF,
+        CUTE,
+        FAIRY,
     }
 
     public enum EEmotion
@@ -36,13 +66,32 @@ namespace PlayJam.Character
     public enum EArm
     {
         IDLE,
-        SPOON,
+        BEAR,
+        CAT,
+        CHEF,
+        COOLCHEF,
+        CUTE,
+        MICHELIN,
+        TOMATO,
+        WAITER,
+        WHITECHEF,
     }
 
-    public enum ECloth
+    public enum EBody
     {
         IDLE,
         APRON,
+        BEAR,
+        CAT,
+        CHEF,
+        COOLCHEF,
+        CUTE,
+        FAIRY,
+        HONEYBEE,
+        MICHELIN,
+        TOMATO,
+        WAITER,
+        WHITECHEF,
     }
 
     /// <summary>
@@ -56,13 +105,16 @@ namespace PlayJam.Character
         public Animator CharacterAnimator => _characterAnim;
 
         [SerializeField]
+        private GameObject _objEar;
+
+        [SerializeField]
         private SerializedDictionary<EEmotion, GameObject> _emotionDic;
 
         [SerializeField]
-        private SerializedDictionary<EArm, GameObject> _armDic;
+        private SerializedDictionary<EArm, List<GameObject>> _armDic;
 
         [SerializeField]
-        private SerializedDictionary<ECloth, GameObject> _clothDic;
+        private SerializedDictionary<EBody, GameObject> _clothDic;
 
         [SerializeField]
         private SerializedDictionary<EHat, GameObject> _hatDic;
@@ -76,13 +128,92 @@ namespace PlayJam.Character
         /// <param name="inEmotion"></param>
         /// <param name="inArm"></param>
         /// <param name="inCloth"></param>
-        public void Initialize(EEmotion inEmotion, EArm inArm, ECloth inCloth, EHat inHat, EAddOn inAddOn)
+        public void Initialize(EEmotion inEmotion, ECostume inCostume)
+        {
+            ChangeEmotion(inEmotion);
+            SetCostume(inCostume);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inEmotion"></param>
+        /// <param name="inArm"></param>
+        /// <param name="inCloth"></param>
+        public void Initialize(EEmotion inEmotion, EArm inArm, EBody inCloth, EHat inHat, EAddOn inAddOn, bool hasEar)
         {
             ChangeEmotion(inEmotion);
             ChangeArm(inArm);
             ChangeCloth(inCloth);
             ChangeHat(inHat);
             ChangeAddOn(inAddOn);
+            SetActiveEar(hasEar);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inEmotion"></param>
+        /// <param name="inArm"></param>
+        /// <param name="inCloth"></param>
+        public void Initialize(EArm inArm, EBody inCloth, EHat inHat, EAddOn inAddOn, bool hasEar)
+        {
+            ChangeArm(inArm);
+            ChangeCloth(inCloth);
+            ChangeHat(inHat);
+            ChangeAddOn(inAddOn);
+            SetActiveEar(hasEar);
+        }
+
+        public void SetActiveEar(bool inActive)
+        {
+            _objEar.SetActive(inActive);
+        }
+
+        public void SetCostume(ECostume inCostume)
+        {
+            switch (inCostume)
+            {
+                case ECostume.IDLE:
+                    Initialize(EArm.IDLE, EBody.IDLE, EHat.IDLE, EAddOn.IDLE, true);
+                    break;
+                case ECostume.BEAR:
+                    Initialize(EArm.BEAR, EBody.BEAR, EHat.BEAR, EAddOn.IDLE, false);
+                    break;
+                case ECostume.CAT:
+                    Initialize(EArm.CAT, EBody.CAT, EHat.CAT, EAddOn.IDLE, false);
+                    break;
+                case ECostume.CHEF:
+                    Initialize(EArm.CAT, EBody.CAT, EHat.CAT, EAddOn.IDLE, false);
+                    break;
+                case ECostume.COOLCHEF:
+                    Initialize(EArm.COOLCHEF, EBody.COOLCHEF, EHat.COOLCHEF, EAddOn.COOLCHEF, false);
+                    break;
+                case ECostume.CUTE:
+                    Initialize(EArm.CUTE, EBody.CUTE, EHat.CUTE, EAddOn.CUTE, false);
+                    break;
+                case ECostume.FAIRY:
+                    Initialize(EArm.IDLE, EBody.FAIRY, EHat.FAIRY, EAddOn.FAIRY, false);
+                    break;
+                case ECostume.FLOWER:
+                    Initialize(EArm.IDLE, EBody.IDLE, EHat.FLOWER, EAddOn.IDLE, false);
+                    break;
+                case ECostume.HONEYBEE:
+                    Initialize(EArm.IDLE, EBody.HONEYBEE, EHat.HONEYBEE, EAddOn.IDLE, false);
+                    break;
+                case ECostume.MICHELIN:
+                    Initialize(EArm.MICHELIN, EBody.MICHELIN, EHat.IDLE, EAddOn.IDLE, true);
+                    break;
+                case ECostume.TOMATO:
+                    Initialize(EArm.TOMATO, EBody.TOMATO, EHat.TOMATO, EAddOn.IDLE, true);
+                    break;
+                case ECostume.WAITER:
+                    Initialize(EArm.WAITER, EBody.WAITER, EHat.IDLE, EAddOn.IDLE, true);
+                    break;
+                case ECostume.WHITECHEF:
+                    Initialize(EArm.WHITECHEF, EBody.WHITECHEF, EHat.IDLE, EAddOn.IDLE, true);
+                    break;
+            }
         }
 
         public void ChangeEmotion(EEmotion inEmotion)
@@ -99,7 +230,7 @@ namespace PlayJam.Character
             }
         }
 
-        public void ChangeCloth(ECloth inCloth)
+        public void ChangeCloth(EBody inCloth)
         {
             foreach (var item in _clothDic)
             {
@@ -121,9 +252,9 @@ namespace PlayJam.Character
                     continue;
 
                 if (item.Key == inArm)
-                    item.Value.SetActive(true);
+                    item.Value.ForEach(x => x.SetActive(true));
                 else
-                    item.Value.SetActive(false);
+                    item.Value.ForEach(x => x.SetActive(false));
             }
         }
 

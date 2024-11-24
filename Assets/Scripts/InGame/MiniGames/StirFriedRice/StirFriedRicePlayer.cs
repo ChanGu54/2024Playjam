@@ -65,7 +65,7 @@ namespace PlayJam.InGame.StirFriedRice
             }
 
             _mainCharacter = CharacterManager.Instance.GetMainCharacter(_trCharacterBasePos);
-            _mainCharacter.Initialize(EEmotion.IDLE, EArm.IDLE, ECloth.APRON, EHat.IDLE, EAddOn.PAN);
+            _mainCharacter.Initialize(EEmotion.IDLE, EArm.IDLE, EBody.APRON, EHat.IDLE, EAddOn.PAN, false);
             _mainCharacter.PlayAnimator(EAnim.IDLE);
             _mainCharacter.transform.localPosition = Vector3.zero;
 

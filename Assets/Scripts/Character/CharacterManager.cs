@@ -43,12 +43,12 @@ namespace PlayJam.Character
         private EAddOn _curAddOn;
 
         [SerializeField]
-        private ECloth _curCloth;
+        private EBody _curBody;
 
         public MainCharacter GetMainCharacter(Transform inParent)
         {
             MainCharacter mainCharacter = Instantiate(_mainCharacterPrefab.gameObject, inParent).GetComponent<MainCharacter>();
-            mainCharacter.Initialize(EEmotion.IDLE, EArm.IDLE, _curCloth, _curHat, _curAddOn);
+            mainCharacter.Initialize(EEmotion.IDLE, EArm.IDLE, _curBody, _curHat, _curAddOn, true);
             return mainCharacter;
         }
     }
