@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using PlayJam.Character.NPC;
 using UnityEngine;
 
 namespace PlayJam.Character
@@ -45,11 +47,21 @@ namespace PlayJam.Character
         [SerializeField]
         private EBody _curBody;
 
+        [SerializeField]
+        private List<Customer> _customers;
+
         public MainCharacter GetMainCharacter(Transform inParent)
         {
             MainCharacter mainCharacter = Instantiate(_mainCharacterPrefab.gameObject, inParent).GetComponent<MainCharacter>();
             mainCharacter.Initialize(EEmotion.IDLE, EArm.IDLE, _curBody, _curHat, _curAddOn, true);
             return mainCharacter;
+        }
+
+        public Customer GetRandomCustomers(Transform inParent)
+        {
+            Customer customerElected = _customers[Random.Range(0, _customers.Count)];
+            Customer customerInstance = Instantiate(customerElected.gameObject, inParent).GetComponent<Customer>();
+            return customerInstance;
         }
     }
 }
