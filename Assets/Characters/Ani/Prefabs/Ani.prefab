@@ -5131,7 +5131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterAnim: {fileID: 984082473263776282}
-  _objEar: {fileID: 0}
+  _objEar: {fileID: 1736488870246299630}
   _emotionDic:
     _serializedList:
     - Key: 0

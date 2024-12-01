@@ -74,7 +74,7 @@ namespace PlayJam.InGame
 
         public void ElectMiniGames(int inTotalElectedCnt)
         {
-            while (ReservedMiniGameDatas.Count <= inTotalElectedCnt)
+            while (ReservedMiniGameDatas.Count < inTotalElectedCnt)
             {
                 MiniGameData miniGameElected = null;
 
@@ -82,6 +82,12 @@ namespace PlayJam.InGame
                     miniGameElected = AllMiniGameDatas.Where(x => x.GameKind == _testMiniGameKind).FirstOrDefault();
                 else
                     miniGameElected = AllMiniGameDatas[Random.Range(0, AllMiniGameDatas.Count)];
+
+                // 미니게임 선정 중복방지
+                if (ReservedMiniGameDatas.Count > 0 && _isTestGame == false && ReservedMiniGameDatas[ReservedMiniGameDatas.Count - 1].GameKind == miniGameElected.GameKind)
+                {
+                    continue;
+                }
 
                 ReservedMiniGameDatas.Add(miniGameElected);
             }

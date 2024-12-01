@@ -18,5 +18,13 @@ namespace PlayJam.Character.NPC
         private SerializedDictionary<EFood, GameObject> _foodToGoDic;
 
         public ECustomerType CustomerType;
+
+        public void ShowFoodResource(EFood inFood)
+        {
+            foreach (var pair in _foodToGoDic)
+            {
+                pair.Value.gameObject.SetActive(pair.Key == inFood);
+            }
+        }
     }
 }

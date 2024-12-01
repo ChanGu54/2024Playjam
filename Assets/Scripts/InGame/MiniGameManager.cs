@@ -84,6 +84,7 @@ namespace PlayJam.InGame
             RegisterController<MiniGameTimeController>();
             RegisterController<MiniGameRuntimeController>();
             RegisterController<MiniGameUIController>();
+            RegisterController<MiniGameCustomerController>();
         }
 
         /// <summary>

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5024633842671732054}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2323046201226125624}
   - component: {fileID: 1350698267060981209}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StackHamburger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6897404229285125981}
   - component: {fileID: 168506806764743956}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CuttingFruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3930691298064667877}
   - component: {fileID: 6742361398273880875}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StirFriedRice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7251200316063277543}
   - component: {fileID: 7377746617621739447}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PickingCabbage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +386,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1742375563811524751}
   - component: {fileID: 8400145702299179424}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: pinky_arm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2238501168364178129}
   - component: {fileID: 5819716073620945}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Whipping
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -554,7 +554,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6223410641897402483}
   - component: {fileID: 6025601544170786698}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: pinky_arm2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -638,7 +638,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3476891826228622746}
   - component: {fileID: 379455253570671479}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CookTakoyaki
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -722,7 +722,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8480747116715151282}
   - component: {fileID: 3355020691144559216}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: customer_Q
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -738,8 +738,8 @@ Transform:
   m_GameObject: {fileID: 6288151767295299460}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 269.14, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 280, z: 0}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5024633842671732054}
@@ -807,7 +807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6731013978515919161}
   - component: {fileID: 8776114021232098451}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MakeDumplingSkin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -891,7 +891,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5661194849014402962}
   - component: {fileID: 4826180594710132060}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SprinkleCocoaPowder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -975,7 +975,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3239299895418165013}
   - component: {fileID: 3135341367558532156}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CuttingCabbage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1060,7 +1060,8 @@ GameObject:
   - component: {fileID: 1988977092164539612}
   - component: {fileID: 1478104520129736480}
   - component: {fileID: 489073371090931730}
-  m_Layer: 0
+  - component: {fileID: -2927307944545351123}
+  m_Layer: 3
   m_Name: pinky_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1076,8 +1077,8 @@ Transform:
   m_GameObject: {fileID: 7831072194075895500}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1974, y: 398.86, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1742375563811524751}
@@ -1170,3 +1171,15 @@ MonoBehaviour:
     - Key: 2
       Value: {fileID: 5278805285341649537}
   CustomerType: 0
+--- !u!210 &-2927307944545351123
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7831072194075895500}
+  m_Enabled: 1
+  m_SortingLayerID: -517603665
+  m_SortingLayer: 1
+  m_SortingOrder: 32767
+  m_SortAtRoot: 0
