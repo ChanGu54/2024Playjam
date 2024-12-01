@@ -1246,7 +1246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e292d5e8433ef4676a5a2b7c5a2594b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isTesting: 1
+  _isTesting: 0
   _testTarget: 8
   _miniGameConfig: {fileID: 11400000, guid: 2cb5eff4084424e008039833f0f2ae56, type: 2}
   _miniGames:
