@@ -22,20 +22,6 @@ namespace PlayJam.InGame.UI
         /// <summary>
         /// 
         /// </summary>
-        public override void Initialize()
-        {
-            for (int i = 0; i < _animHearts.Length; i++)
-            {
-                string animClipName = i < MiniGameSharedData.Instance.Config.InitialHeartCount ? "On" : "Off";
-                _animHearts[i].Play(animClipName);
-            }
-
-            StartCoroutine(Co_OnMiniGameEnd(true, null));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public override void OnMiniGameStart()
         {
             _animRoot.Play("Disappear");
@@ -55,6 +41,24 @@ namespace PlayJam.InGame.UI
         public override void OnMiniGameResume()
         {
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="isSuccess"></param>
+        /// <param name="inCallback"></param>
+        /// <returns></returns>
+        public override IEnumerator OnPostInitialize(Action inCallback)
+        {
+            for (int i = 0; i < _animHearts.Length; i++)
+            {
+                string animClipName = i < MiniGameSharedData.Instance.Config.InitialHeartCount ? "On" : "Off";
+                _animHearts[i].Play(animClipName);
+            }
+
+            yield return Co_OnMiniGameEnd(true, null);
+            inCallback.Invoke();
         }
 
         /// <summary>
@@ -96,6 +100,14 @@ namespace PlayJam.InGame.UI
 
             yield return new WaitForSeconds(duration);
 
+            inCallback?.Invoke();
+        }
+
+        public override IEnumerator Co_OnMiniGameQuit(Action inCallback)
+        {
+            _animRoot.Play("Disappear");
+            float animLength = _animRoot.GetCurrentAnimatorClipInfo(0).Length;
+            yield return new WaitForSeconds(animLength);
             inCallback?.Invoke();
         }
 

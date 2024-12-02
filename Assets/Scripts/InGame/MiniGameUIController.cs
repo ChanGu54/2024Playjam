@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Cysharp.Threading.Tasks;
 using PlayJam.InGame.UI;
 using PlayJam.Utils;
 using UnityEngine;
@@ -36,6 +39,32 @@ namespace PlayJam.InGame
             MiniGameManager.OnMiniGamePause.AddListener(OnMiniGamePause);
             MiniGameManager.OnMiniGameResume.AddListener(OnMiniGameResume);
             MiniGameManager.OnMiniGameEnd.AddListener(OnMiniGameEnd);
+            MiniGameManager.OnMiniGameQuit.AddListener(OnMiniGameQuit);
+        }
+
+        public override IEnumerator Co_PostInitialize(Action inEndCallback)
+        {
+            for (int i = 0; i < _miniGameUIs.Count; i++)
+            {
+                _miniGameUIs[i].gameObject.SetActive(true);
+            }
+
+            yield return null;
+
+            List<WaitForSignal> flags = new List<WaitForSignal>();
+
+            for (int i = 0; i < _miniGameUIs.Count; i++)
+            {
+                flags.Add(new WaitForSignal());
+                yield return _miniGameUIs[i].OnPostInitialize(flags[i].Signal);
+            }
+
+            for (int i = 0; i < _miniGameUIs.Count; i++)
+            {
+                yield return flags[i].Wait();
+            }
+
+            inEndCallback.Invoke();
         }
 
         public void OnMiniGameStart()
@@ -75,6 +104,7 @@ namespace PlayJam.InGame
             {
                 WaitForSignal flag = new WaitForSignal();
                 StartCoroutine(_miniGameUIs[i].Co_OnMiniGameEnd(isSuccess, flag.Signal));
+                flags.Add(flag);
             }
 
             for (int i = 0; i < flags.Count; i++)
@@ -82,11 +112,54 @@ namespace PlayJam.InGame
                 yield return flags[i].Wait();
             }
 
-            MiniGameManager.OnMiniGamePrevStart.Invoke();
+            if (MiniGameSharedData.Instance.HeartCount > 0)
+                MiniGameManager.OnMiniGamePrevStart.Invoke();
+            else
+            {
+                MiniGameManager.WorldManager.OnGameEnd();
+                MiniGameManager.OnMiniGameQuit.Invoke();
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnMiniGameQuit()
+        {
+            List<WaitForSignal> flags = new List<WaitForSignal>();
+
+            for (int i = 0; i < _miniGameUIs.Count; i++)
+            {
+                if (_miniGameUIs[i] is MiniGameTimerUI)
+                {
+                    flags.Add(new WaitForSignal());
+                    _miniGameUIs[i].Co_OnMiniGameQuit(flags.Last().Signal);
+                }
+                else
+                {
+                    _miniGameUIs[i].gameObject.SetActive(false);
+                }
+            }
+
+            UniTask.Create(async () =>
+            {
+                await UniTask.WaitUntil(() => flags.TrueForAll(x => x.HasSignal()));
+                Clear();
+
+                MiniGameManager.WorldManager.SetPlayingFlag(false);
+            });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public override void Clear()
         {
+            for (int i = 0; i < _miniGameUIs.Count; i++)
+            {
+                _miniGameUIs[i].gameObject.SetActive(false);
+            }
+
             _miniGameUIs.ForEach(x => x.Clear());
             _miniGameUIs = null;
         }

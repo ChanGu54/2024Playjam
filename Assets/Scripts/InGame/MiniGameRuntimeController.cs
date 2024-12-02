@@ -34,6 +34,7 @@ namespace PlayJam.InGame
             MiniGameManager.OnMiniGameEnd.AddListener(OnMiniGameEnd);
             MiniGameManager.OnMiniGamePause.AddListener(OnMiniGamePause);
             MiniGameManager.OnMiniGameResume.AddListener(OnMiniGameResume);
+            MiniGameManager.OnMiniGameQuit.AddListener(OnMiniGameQuit);
         }
 
         private void OnMiniGamePrevStart()
@@ -96,6 +97,27 @@ namespace PlayJam.InGame
                 StartCoroutine(_pickedMiniGame.MiniGameInstance.OnSuccess(callback));
             else
                 StartCoroutine(_pickedMiniGame.MiniGameInstance.OnFail(callback));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnMiniGameQuit()
+        {
+            Clear();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override void Clear()
+        {
+            base.Clear();
+
+            if (_pickedMiniGame != null)
+                _pickedMiniGame.MiniGameInstance.gameObject.SetActive(false);
+
+            _pickedMiniGame = null;
         }
     }
 }

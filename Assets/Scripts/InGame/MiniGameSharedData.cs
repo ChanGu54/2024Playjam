@@ -120,6 +120,11 @@ namespace PlayJam.InGame
 
         }
 
+        public void OnMiniGameQuit()
+        {
+            Clear();
+        }
+
         public void OnMiniGameEnd(bool isSuccess)
         {
             if (isSuccess == true)

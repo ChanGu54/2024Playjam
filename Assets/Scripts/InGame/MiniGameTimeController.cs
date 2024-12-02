@@ -21,6 +21,7 @@ namespace PlayJam.InGame
             MiniGameManager.OnMiniGamePause.AddListener(PauseTimer);
             MiniGameManager.OnMiniGameResume.AddListener(ResumeTimer);
             MiniGameManager.OnMiniGameEnd.AddListener(EndTimer);
+            MiniGameManager.OnMiniGameQuit.AddListener(EndTimer);
         }
 
         public void StartNewTimer()
@@ -49,13 +50,18 @@ namespace PlayJam.InGame
             StartCoroutine(_timerCoroutine);
         }
 
-        public void EndTimer(bool isSuccess)
+        public void EndTimer()
         {
             if (_timerCoroutine == null)
                 return;
 
             StopCoroutine(_timerCoroutine);
             _timerCoroutine = null;
+        }
+
+        public void EndTimer(bool isSuccess)
+        {
+            EndTimer();
         }
 
         public override IEnumerator Co_PrevEndGame(Action inEndCallback)

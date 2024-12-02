@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using PlayJam.Utils;
+using PlayJam.World;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -41,36 +42,53 @@ namespace PlayJam.InGame
         public static UnityEvent OnMiniGamePostStart;
         public static UnityEvent OnMiniGameResume;
         public static UnityEvent OnMiniGamePause;
+        public static UnityEvent OnMiniGameQuit;
         public static UnityEvent<bool> OnMiniGameEnd;
 
-        private void Awake()
-        {
-            StartCoroutine(Co_StartGame());
-        }
+        private static WorldManager _worldManager;
+
+        public static WorldManager WorldManager { get => _worldManager; }
 
         /// <summary>
         /// 게임 시작
         /// </summary>
-        public IEnumerator Co_StartGame()
+        public IEnumerator Co_StartGame(bool isTestGame)
         {
-            MiniGameSharedData.Instance.Initialize(_miniGameConfig, _miniGames, _isTesting, _testTarget);
+            if (_worldManager == null)
+                _worldManager = GameObject.Find("WorldManager").GetComponent<WorldManager>();
+
+            if (isTestGame == true)
+                MiniGameSharedData.Instance.Initialize(_miniGameConfig, _miniGames, _isTesting, _testTarget);
+            else
+                MiniGameSharedData.Instance.Initialize(_miniGameConfig, _miniGames, false, _testTarget);
+
             OnMiniGamePrevStart = new UnityEvent();
             OnMiniGameStart = new UnityEvent();
             OnMiniGamePostStart = new UnityEvent();
             OnMiniGameResume = new UnityEvent();
             OnMiniGamePause = new UnityEvent();
             OnMiniGameEnd = new UnityEvent<bool>();
+            OnMiniGameQuit = new UnityEvent();
+
 
             // Datas should be refreshed first.
+            OnMiniGameStart.AddListener(_worldManager.HideAnimGrass);
+            OnMiniGameEnd.AddListener((b) => _worldManager.ShowAnimGrass());
+
             OnMiniGamePrevStart.AddListener(MiniGameSharedData.Instance.OnMiniGamePrevStart);
             OnMiniGameStart.AddListener(MiniGameSharedData.Instance.OnMiniGameStart);
             OnMiniGamePostStart.AddListener(MiniGameSharedData.Instance.OnMiniGamePostStart);
             OnMiniGameResume.AddListener(MiniGameSharedData.Instance.OnMiniGameResume);
             OnMiniGamePause.AddListener(MiniGameSharedData.Instance.OnMiniGamePause);
             OnMiniGameEnd.AddListener(MiniGameSharedData.Instance.OnMiniGameEnd);
+            OnMiniGameQuit.AddListener(MiniGameSharedData.Instance.OnMiniGameQuit);
 
             RegisterControllers();
             Initialize();
+
+            // 메인 컨트롤러 클리어
+            OnMiniGameQuit.AddListener(Clear);
+
             yield return Co_StartProcess();
         }
 
@@ -98,7 +116,7 @@ namespace PlayJam.InGame
             for (int i = 0; i < _controllers.Count; i++)
             {
                 WaitForSignal flag = new WaitForSignal();
-                StartCoroutine(_controllers[i].Co_PrevStartGame(flag.Signal));
+                StartCoroutine(_controllers[i].Co_PostInitialize(flag.Signal));
                 flags.Add(flag);
             }
 
@@ -107,13 +125,26 @@ namespace PlayJam.InGame
                 yield return flags[i].Wait();
             }
 
-            flags.Clear();
+            if (_worldManager != null)
+                _worldManager.OnGameStart();
+
+            flags.ForEach(x => x.Clear());
 
             for (int i = 0; i < _controllers.Count; i++)
             {
-                WaitForSignal flag = new WaitForSignal();
-                StartCoroutine(_controllers[i].Co_StartGame(flag.Signal));
-                flags.Add(flag);
+                StartCoroutine(_controllers[i].Co_PrevStartGame(flags[i].Signal));
+            }
+
+            for (int i = 0; i < _controllers.Count; i++)
+            {
+                yield return flags[i].Wait();
+            }
+
+            flags.ForEach(x => x.Clear());
+
+            for (int i = 0; i < _controllers.Count; i++)
+            {
+                StartCoroutine(_controllers[i].Co_StartGame(flags[i].Signal));
             }
 
             for (int i = 0; i < _controllers.Count; i++)
@@ -122,6 +153,8 @@ namespace PlayJam.InGame
             }
 
             OnMiniGamePrevStart.Invoke();
+
+            // 가장 마지막에 처리            OnMiniGameQuit.AddListener(Quit);
         }
 
         /// <summary>
@@ -167,22 +200,10 @@ namespace PlayJam.InGame
         }
 
         /// <summary>
-        /// 게임 재시작
-        /// </summary>
-        public void RestartGame()
-        {
-            Clear();
-            StartCoroutine(Co_StartGame());
-        }
-
-        /// <summary>
         /// 데이터 삭제
         /// </summary>
         public void Clear()
         {
-            MiniGameSharedData.Instance.Clear();
-
-            _controllers.ForEach(x => x.Clear());
             _controllers.Clear();
 
             _controllers = null;
@@ -200,6 +221,15 @@ namespace PlayJam.InGame
             OnMiniGameResume = null;
             OnMiniGamePause = null;
             OnMiniGameEnd = null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Quit()
+        {
+            OnMiniGameQuit.RemoveAllListeners();
+            OnMiniGameQuit = null;
         }
 
         /// <summary>

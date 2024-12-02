@@ -55,5 +55,13 @@ namespace PlayJam.Utils
                 yield return null;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Clear()
+        {
+            _flag = false;
+        }
     }
 }

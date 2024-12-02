@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using PlayJam.Character.NPC;
+using PlayJam.Utils;
 using UnityEngine;
 using static PlayJam.InGame.MiniGameRuntimeController;
 
@@ -81,6 +82,7 @@ namespace PlayJam.InGame
             MiniGameManager.OnMiniGameEnd.AddListener(OnMiniGameEnd);
             MiniGameManager.OnMiniGamePause.AddListener(OnMiniGamePause);
             MiniGameManager.OnMiniGameResume.AddListener(OnMiniGameResume);
+            MiniGameManager.OnMiniGameQuit.AddListener(OnMiniGameQuit);
         }
 
         private void OnMiniGamePrevStart()
@@ -145,6 +147,48 @@ namespace PlayJam.InGame
                 else
                     _customerList[i].transform.DOLocalMoveX(_customerList[i].transform.localPosition.x - 140, moveTimePerCustomerPos).SetEase(Ease.Linear);
             }
+        }
+
+        private void OnMiniGameQuit()
+        {
+            float fixedDuration = 1f;
+            float walkAnimDuration = 1/6f;
+
+            List<WaitForSignal> flags = new List<WaitForSignal>();
+            
+            for (int i = 0; i < _customerList.Count; i++)
+            {
+                for (int j = 0; j < (fixedDuration / walkAnimDuration) / 2f; j++)
+                {
+                    int cachedI = i;
+
+                    WaitForSignal new1 = new();
+                    WaitForSignal new2 = new();
+
+                    flags.Add(new1);
+                    flags.Add(new2);
+
+                    StartCoroutine(TimerCoroutine(walkAnimDuration * (j * 2),
+                        () =>
+                        _customerList[cachedI].transform.DOLocalMoveY(25, walkAnimDuration).SetEase(Ease.Linear).OnComplete(new1.Signal)
+                        )) ;
+                    StartCoroutine(TimerCoroutine(walkAnimDuration * (j * 2 + 1),
+                        () =>
+                        _customerList[cachedI].transform.DOLocalMoveY(0, walkAnimDuration).SetEase(Ease.Linear).OnComplete(new2.Signal)
+                        ));
+                }
+
+                WaitForSignal new3 = new();
+                flags.Add(new3);
+
+                _customerList[i].transform.DOLocalMoveX(-420, fixedDuration).SetEase(Ease.Linear).OnComplete(new3.Signal);
+            }
+
+            UniTask.Create(async () =>
+            {
+                await UniTask.WaitUntil(() => flags.TrueForAll(y => y.HasSignal()));
+                Clear();
+            });
         }
 
         private IEnumerator TimerCoroutine(float duration, System.Action onComplete)

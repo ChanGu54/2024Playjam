@@ -21,6 +21,17 @@ public class BaseMiniGameController : MonoBehaviour
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="inEndCallback"></param>
+    /// <returns></returns>
+    public virtual IEnumerator Co_PostInitialize(Action inEndCallback)
+    {
+        yield return null;
+        inEndCallback?.Invoke();
+    }
+
+    /// <summary>
     /// 게임 시작 전 호출
     /// </summary>
     /// <param name="inEndCallback"></param>
