@@ -813,7 +813,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 205942114785204488}
-  - component: {fileID: 8164807316838095838}
   - component: {fileID: 4331153693025193732}
   m_Layer: 3
   m_Name: StackHamburger
@@ -840,22 +839,6 @@ Transform:
   - {fileID: 1430909070110714797}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8164807316838095838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5922505483022149068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6608ec1abad734f6abfa1d527f73aa2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _baseResolutionWidth: 720
-  _baseResolutionHeight: 1280
-  _isActivated: 1
-  _anchor: 1
 --- !u!114 &4331153693025193732
 MonoBehaviour:
   m_ObjectHideFlags: 0

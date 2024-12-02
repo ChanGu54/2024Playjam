@@ -130,15 +130,8 @@ namespace PlayJam.InGame
 
             for (int i = 0; i < _miniGameUIs.Count; i++)
             {
-                if (_miniGameUIs[i] is MiniGameTimerUI)
-                {
-                    flags.Add(new WaitForSignal());
-                    _miniGameUIs[i].Co_OnMiniGameQuit(flags.Last().Signal);
-                }
-                else
-                {
-                    _miniGameUIs[i].gameObject.SetActive(false);
-                }
+                flags.Add(new WaitForSignal());
+                StartCoroutine(_miniGameUIs[i].Co_OnMiniGameQuit(flags.Last().Signal));
             }
 
             UniTask.Create(async () =>

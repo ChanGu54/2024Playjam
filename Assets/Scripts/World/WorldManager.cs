@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using PlayJam.Character;
 using PlayJam.InGame;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,16 +40,24 @@ namespace PlayJam.World
         [SerializeField]
         private GameObject _worldUI;
 
+        [SerializeField]
+        private TextMeshProUGUI _txtCarrot;
+
         private bool _isPlaying = false;
 
         private void Awake()
         {
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 60;
+
             _characterShown.SetCostume(UserDataHelper.Instance.EquippedCostume);
             _btnStart.onClick.AddListener(OnClickBtnStart);
             _btnRank.onClick.AddListener(OnClickBtnRank);
             _btnGameList.onClick.AddListener(OnClickBtnGameList);
             _btnCostume.onClick.AddListener(OnClickBtnCostume);
             _btnSettings.onClick.AddListener(OnClickBtnSettings);
+
+            RefreshCoinCount();
         }
 
         private void OnClickBtnStart()
@@ -112,6 +121,11 @@ namespace PlayJam.World
         {
             if (_isPlaying == true)
                 return;
+        }
+
+        public void RefreshCoinCount()
+        {
+            _txtCarrot.text = UserDataHelper.Instance.Coin.ToString();
         }
     }
 }

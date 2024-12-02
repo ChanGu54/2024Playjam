@@ -173,7 +173,7 @@ namespace PlayJam.InGame.Whipping
 #else
             if (Input.touchCount <= 0)
             {
-                _lastTouchPos = Vector3.zero;
+                _touchStartPos = Vector3.zero;
                 return;
             }
 

@@ -78,7 +78,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 7.2, y: 9.18}
+  m_Size: {x: 720, y: 968}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -93,7 +93,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2547696958500206807}
-  - component: {fileID: 1101563569731468209}
   - component: {fileID: 980788101011004720}
   m_Layer: 3
   m_Name: MakeDumplingSkin
@@ -101,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2547696958500206807
 Transform:
   m_ObjectHideFlags: 0
@@ -120,22 +119,6 @@ Transform:
   - {fileID: 8166431925872152450}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1101563569731468209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4491180138246198265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6608ec1abad734f6abfa1d527f73aa2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _baseResolutionWidth: 720
-  _baseResolutionHeight: 1280
-  _isActivated: 1
-  _anchor: 1
 --- !u!114 &980788101011004720
 MonoBehaviour:
   m_ObjectHideFlags: 0

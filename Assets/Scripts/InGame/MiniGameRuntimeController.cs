@@ -115,7 +115,10 @@ namespace PlayJam.InGame
             base.Clear();
 
             if (_pickedMiniGame != null)
+            {
+                _pickedMiniGame.MiniGameInstance.Clear();
                 _pickedMiniGame.MiniGameInstance.gameObject.SetActive(false);
+            }
 
             _pickedMiniGame = null;
         }

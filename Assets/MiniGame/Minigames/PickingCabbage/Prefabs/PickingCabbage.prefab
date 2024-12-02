@@ -145,6 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PickingDir: 1
   SpriteRenderer: {fileID: 3645026456037114693}
+  Collider2D: {fileID: 6493775521708557654}
 --- !u!1 &1671843612631492106
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PickingDir: 0
   SpriteRenderer: {fileID: 1703474387978261380}
+  Collider2D: {fileID: 6681243850452230657}
 --- !u!1 &3021212775725637295
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,6 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PickingDir: 0
   SpriteRenderer: {fileID: 6911851976581067636}
+  Collider2D: {fileID: 2010346241442057245}
 --- !u!1 &3536719484530259615
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,6 +711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PickingDir: 1
   SpriteRenderer: {fileID: 2935365556073351086}
+  Collider2D: {fileID: 1983332526835140234}
 --- !u!1 &5414159916058293188
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,6 +857,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PickingDir: 0
   SpriteRenderer: {fileID: 4725350647934059653}
+  Collider2D: {fileID: 2886513502301863441}
 --- !u!1 &5639532705098768368
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,7 +867,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1667286753225728663}
-  - component: {fileID: 4288510761751425743}
   - component: {fileID: 8443951678385162808}
   m_Layer: 3
   m_Name: PickingCabbage
@@ -870,7 +874,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1667286753225728663
 Transform:
   m_ObjectHideFlags: 0
@@ -888,22 +892,6 @@ Transform:
   - {fileID: 4406097961538473938}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4288510761751425743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5639532705098768368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6608ec1abad734f6abfa1d527f73aa2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _baseResolutionWidth: 720
-  _baseResolutionHeight: 1280
-  _isActivated: 1
-  _anchor: 1
 --- !u!114 &8443951678385162808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -918,7 +906,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPlaying: 0
   _config: {fileID: 0}
-  _targets: []
+  _targets:
+  - {fileID: 8442120913381536453}
+  - {fileID: 1439851250784085853}
+  - {fileID: 7600945873040271870}
+  - {fileID: 6773025296427429831}
+  - {fileID: 1034943110811916435}
+  - {fileID: 5498137667046456741}
+  - {fileID: 78781750211002926}
+  - {fileID: 8635057048150679921}
 --- !u!1 &5795653808049371103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,6 +1060,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PickingDir: 1
   SpriteRenderer: {fileID: 1768932325753232530}
+  Collider2D: {fileID: 6131868814787757976}
 --- !u!1 &5875699528476162181
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,6 +1542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PickingDir: 1
   SpriteRenderer: {fileID: 403989551125262558}
+  Collider2D: {fileID: 1311688291434522272}
 --- !u!1 &8078407659153562268
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,3 +1688,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PickingDir: 0
   SpriteRenderer: {fileID: 1099129404978556752}
+  Collider2D: {fileID: 1179307066102591965}

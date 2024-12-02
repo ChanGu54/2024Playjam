@@ -1236,7 +1236,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5262706125880757011}
-  - component: {fileID: 8733482212974244598}
   - component: {fileID: 8257891303789583536}
   m_Layer: 3
   m_Name: CookTakoyaki
@@ -1244,7 +1243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5262706125880757011
 Transform:
   m_ObjectHideFlags: 0
@@ -1262,22 +1261,6 @@ Transform:
   - {fileID: 5057671403038300380}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8733482212974244598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6179300472545601821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6608ec1abad734f6abfa1d527f73aa2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _baseResolutionWidth: 720
-  _baseResolutionHeight: 1280
-  _isActivated: 1
-  _anchor: 1
 --- !u!114 &8257891303789583536
 MonoBehaviour:
   m_ObjectHideFlags: 0
