@@ -82,13 +82,13 @@ namespace PlayJam.World
         public void OnGameStart()
         {
             _worldUI.gameObject.SetActive(false);
-            _animAri.Play("Fly_Out");
+            _animAri.Play("Ari_FlyOut");
         }
 
         public void OnGameEnd()
         {
             _worldUI.gameObject.SetActive(true);
-            _animAri.Play("Fly_In");
+            _animAri.Play("Ari_FlyIn");
             ShowAnimGrass();
         }
 

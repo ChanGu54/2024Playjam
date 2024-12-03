@@ -1087,22 +1087,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 402524926254963960, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -60
-      objectReference: {fileID: 0}
-    - target: {fileID: 402524926254963960, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 473921054670816717, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 641412954299843432, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_Name
-      value: Trap_6
-      objectReference: {fileID: 0}
     - target: {fileID: 1003409424570215835, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1143,73 +1127,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2181837659397072366, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3546784687811532125, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 17.39999
-      objectReference: {fileID: 0}
-    - target: {fileID: 4418832666113199585, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_Name
-      value: Trap_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4450736442848593724, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: _isTesting
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4450736442848593724, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
       propertyPath: _testTarget
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5563128518808220654, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_Name
-      value: Trap_5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5596060254114311665, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 760754779}
-    - target: {fileID: 6014397460410688029, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_Name
-      value: Trap_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6719535976366645268, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7014196231066611818, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7151412804072930092, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_Name
-      value: Trap_9
-      objectReference: {fileID: 0}
-    - target: {fileID: 7580429601505159175, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_Name
-      value: Trap_7
-      objectReference: {fileID: 0}
     - target: {fileID: 7606565024187990114, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
       propertyPath: m_Name
       value: MiniGameManager
       objectReference: {fileID: 0}
     - target: {fileID: 8619722471035759156, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8956728031411994311, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_Name
-      value: Trap_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9096197196381535515, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_Name
-      value: Trap_8
-      objectReference: {fileID: 0}
-    - target: {fileID: 9140903836301146816, guid: 89c0e322436ed4045b6af66a97c376c1, type: 3}
-      propertyPath: m_Name
-      value: Trap_4
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

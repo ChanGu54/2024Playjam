@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -39,6 +40,9 @@ namespace PlayJam.InGame
 
         private EMiniGame _testMiniGameKind;
 
+        private List<EMiniGame> _newGameStageSelector = new List<EMiniGame>();
+        private List<float> _electPercentageList = new List<float>();
+
         /// <summary>
         /// 초기화
         /// </summary>
@@ -67,6 +71,9 @@ namespace PlayJam.InGame
             HeartCount = Config.InitialHeartCount;
             AllMiniGameDatas = inAllMiniGames;
 
+            _newGameStageSelector = Enum.GetValues(typeof(EMiniGame)).Cast<EMiniGame>().ToList();
+            _electPercentageList = Enumerable.Repeat(10f, inAllMiniGames.Count).ToList();
+
             ElectMiniGames(5);
             CurrentMiniGameData = ReservedMiniGameDatas[0];
             ReservedMiniGameDatas.RemoveAt(0);
@@ -81,12 +88,41 @@ namespace PlayJam.InGame
                 if (_isTestGame == true)
                     miniGameElected = AllMiniGameDatas.Where(x => x.GameKind == _testMiniGameKind).FirstOrDefault();
                 else
-                    miniGameElected = AllMiniGameDatas[Random.Range(0, AllMiniGameDatas.Count)];
-
-                // 미니게임 선정 중복방지
-                if (ReservedMiniGameDatas.Count > 0 && _isTestGame == false && ReservedMiniGameDatas[ReservedMiniGameDatas.Count - 1].GameKind == miniGameElected.GameKind)
                 {
-                    continue;
+                    if (_newGameStageSelector.Count > 0)
+                    {
+                        EMiniGame electedEnum = _newGameStageSelector[UnityEngine.Random.Range(0, _newGameStageSelector.Count)];
+                        _newGameStageSelector.Remove(electedEnum);
+                        miniGameElected = AllMiniGameDatas.Where(x => x.GameKind == electedEnum).FirstOrDefault();
+                        Debug.Log($"남은 초기 미니게임 수 : {_newGameStageSelector.Count}");
+                    }
+                    else
+                    {
+                        float percentageSum = _electPercentageList.Sum();
+                        float rand = UnityEngine.Random.Range(0, percentageSum);
+                        float sum = 0;
+
+                        for (int i = 0; i < _electPercentageList.Count; i++)
+                        {
+                            sum += _electPercentageList[i];
+                            if (sum >= rand)
+                            {
+                                miniGameElected = AllMiniGameDatas[i];
+                                float percentageToDecrease = Mathf.Clamp(_electPercentageList[i], 0, 9);
+                                float distributeVal = percentageToDecrease / (_electPercentageList.Count - 1);
+
+                                for (int j = 0; j < _electPercentageList.Count; j++)
+                                {
+                                    if (j == i)
+                                        _electPercentageList[j] -= percentageToDecrease;
+                                    else
+                                        _electPercentageList[j] += distributeVal;
+                                }
+
+                                break;
+                            }
+                        }
+                    }
                 }
 
                 ReservedMiniGameDatas.Add(miniGameElected);
