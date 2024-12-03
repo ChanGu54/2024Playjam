@@ -17,3 +17,6 @@ MonoBehaviour:
   InputMethod: 0
   TakoyakiMaxCount: 9
   TakoyakiMinCount: 1
+  TrapAppearStage: 1
+  TrapAppearPercent: 20
+  TrapAppearPercentWeight: 10

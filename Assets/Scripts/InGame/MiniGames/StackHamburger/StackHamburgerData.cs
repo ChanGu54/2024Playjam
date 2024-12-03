@@ -15,9 +15,13 @@ namespace PlayJam.InGame.StackHamburger
             cabbage,
             Bread,
             Cheese,
+            Trap,
         }
 
         public List<StackHamburgerIngredientData> Targets;
+
+        [Header("함정 등장 난이도")]
+        public int TrapAppearLevel;
     }
 
     /// <summary>

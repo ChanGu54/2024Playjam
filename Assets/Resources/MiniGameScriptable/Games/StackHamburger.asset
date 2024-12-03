@@ -26,3 +26,6 @@ MonoBehaviour:
     DropTIme: 2
   - Element: 4
     DropTIme: 1
+  - Element: 5
+    DropTIme: 1.5
+  TrapAppearLevel: 0

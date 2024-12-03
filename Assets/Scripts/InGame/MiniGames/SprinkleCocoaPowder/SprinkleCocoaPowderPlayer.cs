@@ -135,7 +135,7 @@ namespace PlayJam.InGame.SprinkleCocoaPowder
 
                 Vector3 pos = Camera.main.ScreenToWorldPoint(touch.position);
 
-                // ÀÌ¹ÌÁöÀÇ Ãæµ¹ ¹üÀ§ È®ÀÎ
+                // ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
                 Collider2D hit = Physics2D.OverlapPoint(pos);
                 if (hit == null)
                     continue;
@@ -151,7 +151,7 @@ namespace PlayJam.InGame.SprinkleCocoaPowder
                 _curScore += Mathf.Lerp(_config.MinScorePerTouch, _config.MaxScorePerTouch, Mathf.Abs(_curDegree / _config.MaxRotationDegree));
                 PlayPowderEffect();
 
-                if (_curScore >= _config.ClearScore)
+                if (_curScore >= _config.ClearScore + _config.ClearScoreWeight * MiniGameSharedData.Instance.StageCount)
                 {
                     MiniGameManager.OnMiniGamePause.Invoke();
                     _sprTiraBefore.gameObject.SetActive(false);

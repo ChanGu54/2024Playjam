@@ -55,7 +55,13 @@ namespace PlayJam.InGame.CuttingCabbage
         [Header("등장하는 스테이지 (최소)")]
         public int AppeaeredStage;
 
-        [Header("잘라야 하는 횟수")]
+        [Header("잘라야 하는 최소 횟수")]
+        public int CuttingMinCount;
+
+        [Header("잘라야 하는 최대 횟수")]
+        public int CuttingMaxCount;
+
+        [HideInInspector]
         public int CuttingCount;
     }
 }

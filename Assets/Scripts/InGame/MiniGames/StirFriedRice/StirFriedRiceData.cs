@@ -10,5 +10,8 @@ namespace PlayJam.InGame.StirFriedRice
 
         [Header("원 최대 속도")]
         public float CircleMaxSpeed = 10;
+
+        [Header("원 속도 증가량")]
+        public float SpeedIncreaseWeight = 1;
     }
 }

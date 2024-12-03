@@ -225,8 +225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e292d5e8433ef4676a5a2b7c5a2594b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isTesting: 0
-  _testTarget: 8
+  _isTesting: 1
+  _testTarget: 7
   _miniGameConfig: {fileID: 11400000, guid: 2cb5eff4084424e008039833f0f2ae56, type: 2}
   _miniGames:
   - {fileID: 11400000, guid: a15f47244fb16944a94849db5c570f77, type: 2}
@@ -553,7 +553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1249452784827586919, guid: a749fb76493104688b7c42e11527c444, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4314598063958563730, guid: a749fb76493104688b7c42e11527c444, type: 3}
       propertyPath: m_Pivot.x
@@ -842,6 +842,10 @@ PrefabInstance:
       propertyPath: Collider2D
       value: 
       objectReference: {fileID: 2475559889123504974}
+    - target: {fileID: 640767989504336025, guid: c1828ad4a90ef492597690a31bf87901, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 17.39999
+      objectReference: {fileID: 0}
     - target: {fileID: 1034943110811916435, guid: c1828ad4a90ef492597690a31bf87901, type: 3}
       propertyPath: Collider2D
       value: 
@@ -900,7 +904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5639532705098768368, guid: c1828ad4a90ef492597690a31bf87901, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6773025296427429831, guid: c1828ad4a90ef492597690a31bf87901, type: 3}
       propertyPath: Collider2D
@@ -1111,6 +1115,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5627912100407285836}
     m_Modifications:
+    - target: {fileID: 32198491927323602, guid: fd289751a744647c5954bd13e6ca4b24, type: 3}
+      propertyPath: m_Name
+      value: Trap_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3874922040281541979, guid: fd289751a744647c5954bd13e6ca4b24, type: 3}
+      propertyPath: m_Name
+      value: Trap_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714156167812092148, guid: fd289751a744647c5954bd13e6ca4b24, type: 3}
+      propertyPath: m_Name
+      value: Trap_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835902373568828200, guid: fd289751a744647c5954bd13e6ca4b24, type: 3}
+      propertyPath: m_Name
+      value: Trap_8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4898719187621139699, guid: fd289751a744647c5954bd13e6ca4b24, type: 3}
+      propertyPath: m_Name
+      value: Trap_4
+      objectReference: {fileID: 0}
     - target: {fileID: 5262706125880757011, guid: fd289751a744647c5954bd13e6ca4b24, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1151,6 +1175,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6058366454282208820, guid: fd289751a744647c5954bd13e6ca4b24, type: 3}
+      propertyPath: m_Name
+      value: Trap_7
+      objectReference: {fileID: 0}
     - target: {fileID: 6179300472545601821, guid: fd289751a744647c5954bd13e6ca4b24, type: 3}
       propertyPath: m_Name
       value: CookTakoyaki
@@ -1158,6 +1186,18 @@ PrefabInstance:
     - target: {fileID: 6179300472545601821, guid: fd289751a744647c5954bd13e6ca4b24, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781946807669888287, guid: fd289751a744647c5954bd13e6ca4b24, type: 3}
+      propertyPath: m_Name
+      value: Trap_9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7951054709106281518, guid: fd289751a744647c5954bd13e6ca4b24, type: 3}
+      propertyPath: m_Name
+      value: Trap_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8076237637810707933, guid: fd289751a744647c5954bd13e6ca4b24, type: 3}
+      propertyPath: m_Name
+      value: Trap_5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1330,6 +1370,10 @@ PrefabInstance:
     - target: {fileID: 205942114785204488, guid: 17ab1a3fb40fb44079396f161ae8401f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5851668650062773497, guid: 17ab1a3fb40fb44079396f161ae8401f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 5922505483022149068, guid: 17ab1a3fb40fb44079396f161ae8401f, type: 3}
       propertyPath: m_Name
@@ -1516,7 +1560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11888532450540602, guid: 8bcced2da8e3445ee82ffe85224c8163, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6296956574828610602, guid: 8bcced2da8e3445ee82ffe85224c8163, type: 3}
       propertyPath: m_Pivot.x

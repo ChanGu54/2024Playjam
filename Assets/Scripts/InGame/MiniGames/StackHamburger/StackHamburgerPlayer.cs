@@ -27,7 +27,7 @@ namespace PlayJam.InGame.StackHamburger
         private Transform _trIngredientRoot;
 
         private int2 ingredientAppearRangeX = new int2(-240, 240);
-        private int ingredinetAppearY = 270;
+        private int ingredinetAppearY = 400;
         private int ingredientDestY = -600;
 
         private List<StackHamburgerIngredientData> _ingredientDatas = new List<StackHamburgerIngredientData>();
@@ -81,8 +81,16 @@ namespace PlayJam.InGame.StackHamburger
             if (_config == null)
                 return;
 
+            StackHamburgerIngredientData trapData = null;
+
             for (int i = 0; i < _config.Targets.Count; i++)
             {
+                if (_config.Targets[i].Element == EElement.Trap)
+                {
+                    trapData = _config.Targets[i];
+                    continue;
+                }
+
                 StackHamburgerIngredientData data = _config.Targets[i];
                 _ingredientDatas.Add(data);
                 _ingredients.Add(_ingredientObjDic[data.Element]);
@@ -90,6 +98,13 @@ namespace PlayJam.InGame.StackHamburger
 
             if (_ingredientDatas.Count <= 0 || _ingredients.Count <= 0)
                 return;
+
+            if (_config.TrapAppearLevel <= MiniGameSharedData.Instance.StageCount)
+            {
+                int insertIndex = UnityEngine.Random.Range(0, _ingredientDatas.Count - 1);
+                _ingredientDatas.Insert(insertIndex, trapData);
+                _ingredients.Add(_ingredientObjDic[trapData.Element]);
+            }
 
             for (int i = 0; i < _ingredients.Count; i++)
             {
@@ -105,6 +120,11 @@ namespace PlayJam.InGame.StackHamburger
         public void OnFail(StackHamburgerIngredient inIngredient)
         {
             if (IsPlaying == false)
+            {
+                return;
+            }
+
+            if (inIngredient.Element == EElement.Trap)
             {
                 return;
             }
@@ -133,9 +153,19 @@ namespace PlayJam.InGame.StackHamburger
             inIngredient.Tween.Kill();
             inIngredient.Tween = null;
 
+            if (inIngredient.Element == EElement.Trap)
+            {
+                // 일단 미니게임 일시정지
+                MiniGameManager.OnMiniGamePause.Invoke();
+
+                // 연출 보여줄거면 보여주고 게임 종료
+                StartCoroutine(OnFail(() => MiniGameManager.OnMiniGameEnd.Invoke(false)));
+                return;
+            }
+
             _catchList.Add(inIngredient.Element);
 
-            if (_catchList.Count == _ingredientObjDic.Count)
+            if (_catchList.Count == _ingredientObjDic.Count - 1)
             {
                 // 일단 미니게임 일시정지
                 MiniGameManager.OnMiniGamePause.Invoke();

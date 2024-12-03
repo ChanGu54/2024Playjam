@@ -25,7 +25,7 @@ namespace PlayJam.InGame.StirFriedRice
         private Tween _tweenCircle;
         private float _circleSpeed;
         private IEnumerator _gaugeCoroutione;
-        private Vector3 _gaugePos = new Vector3(-280, 0, 0);
+        private Vector3 _gaugePos = new Vector3(-260, 0, 0);
 
         public override void Clear()
         {
@@ -69,7 +69,7 @@ namespace PlayJam.InGame.StirFriedRice
             _mainCharacter.PlayAnimator(EAnim.IDLE);
             _mainCharacter.transform.localPosition = Vector3.zero;
 
-            _circleSpeed = UnityEngine.Random.Range(_config.CircleMinSpeed, _config.CircleMaxSpeed);
+            _circleSpeed = UnityEngine.Random.Range(_config.CircleMinSpeed + _config.SpeedIncreaseWeight * MiniGameSharedData.Instance.StageCount, _config.CircleMaxSpeed);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace PlayJam.InGame.StirFriedRice
             while (true)
             {
                 dest = -dest;
-                _tweenCircle = _trCircle.transform.DOLocalMove(dest, _circleSpeed).SetEase(Ease.Linear).OnComplete(flag.Signal);
+                _tweenCircle = _trCircle.transform.DOLocalMove(dest, Mathf.Abs(_gaugePos.x) / _circleSpeed).SetEase(Ease.Linear).OnComplete(flag.Signal);
                 yield return flag.Wait();
             }
         }
@@ -144,8 +144,11 @@ namespace PlayJam.InGame.StirFriedRice
                     continue;
                 }
 
-                StopCoroutine(_gaugeCoroutione);
-                _gaugeCoroutione = null;
+                if (_gaugeCoroutione != null)
+                {
+                    StopCoroutine(_gaugeCoroutione);
+                    _gaugeCoroutione = null;
+                }
 
                 _tweenCircle.Kill();
                 _tweenCircle = null;
@@ -154,7 +157,7 @@ namespace PlayJam.InGame.StirFriedRice
                 MiniGameManager.OnMiniGamePause.Invoke();
 
                 float circleXPos = _trCircle.transform.position.x;
-                if (circleXPos >= -5 && circleXPos <= 5)
+                if (circleXPos >= -15 && circleXPos <= 15)
                 {
                     // 연출 보여줄거면 보여주고 게임 종료
                     StartCoroutine(OnSuccess(() => MiniGameManager.OnMiniGameEnd.Invoke(true)));

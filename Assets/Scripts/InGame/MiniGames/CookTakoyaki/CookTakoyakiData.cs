@@ -12,5 +12,14 @@ namespace PlayJam.InGame.CookTakoyaki
 
         [Header("타코야끼 최소개수(1~Max)")]
         public int TakoyakiMinCount;
+
+        [Header("함정 등장하는 스테이지")]
+        public int TrapAppearStage;
+
+        [Header("함정 등장 확률")]
+        public int TrapAppearPercent;
+
+        [Header("스테이지 증가에 따른 확률 증가값")]
+        public int TrapAppearPercentWeight;
     }
 }

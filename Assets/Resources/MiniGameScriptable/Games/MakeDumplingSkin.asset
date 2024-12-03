@@ -16,3 +16,4 @@ MonoBehaviour:
   Food: 6
   InputMethod: 1
   ClearDistance: 2700
+  ClearDistanceWeight: 10

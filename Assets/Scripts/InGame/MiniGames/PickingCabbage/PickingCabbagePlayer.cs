@@ -13,6 +13,8 @@ namespace PlayJam.InGame.PickingCabbage
         [SerializeField]
         private List<PickingCabbageTarget> _targets;
 
+        private List<PickingCabbageTarget> _additionalTargets = new List<PickingCabbageTarget>();
+
         private Queue<PickingCabbageTarget> _targetQueue = new Queue<PickingCabbageTarget>();
 
         /// <summary>
@@ -26,6 +28,15 @@ namespace PlayJam.InGame.PickingCabbage
 
             _lastTouchPos = Vector3.zero;
             _targetQueue.Clear();
+
+            if (_additionalTargets != null)
+            {
+                for (int i = 0; i < _additionalTargets.Count; i++)
+                {
+                    Destroy(_additionalTargets[i].gameObject);
+                }
+                _additionalTargets.Clear();
+            }
         }
 
         /// <summary>
@@ -38,10 +49,22 @@ namespace PlayJam.InGame.PickingCabbage
 
             _config = inConfig as PickingCabbageData;
 
+            int addedCount = (int)(_config.CabbageSkinWeight * MiniGameSharedData.Instance.StageCount);
+
             for (int i = 0; i < _targets.Count; i++)
             {
                 _targets[i].transform.localPosition = Vector3.zero;
                 _targets[i].SpriteRenderer.color = Color.white;
+            }
+
+            for (int i = 0; i < addedCount; i++)
+            {
+                int indexToClone = (i + 1) % 2;
+                GameObject go = Instantiate(_targets[indexToClone].gameObject, _targets[indexToClone].transform.parent.parent);
+                PickingCabbageTarget target = go.GetComponent<PickingCabbageTarget>();
+                target.transform.position = _targets[indexToClone].transform.position;
+                target.transform.SetAsLastSibling();
+                _additionalTargets.Add(target);
             }
         }
 
@@ -51,6 +74,13 @@ namespace PlayJam.InGame.PickingCabbage
         /// <returns></returns>
         public override IEnumerator OnStart()
         {
+            for (int i = _additionalTargets.Count - 1; i >= 0; i--)
+            {
+                _additionalTargets[i].gameObject.SetActive(true);
+                _additionalTargets[i].Collider2D.enabled = false;
+                _targetQueue.Enqueue(_additionalTargets[i]);
+            }
+
             for (int i = 0; i < _targets.Count; i++)
             {
                 _targets[i].gameObject.SetActive(true);
@@ -118,7 +148,7 @@ namespace PlayJam.InGame.PickingCabbage
             }
             else if (touch.phase == TouchPhase.Moved)
             {
-                if (_lastTouchPos == Vector3.zero && _targetQueue.Count <= 0)
+                if (_lastTouchPos == Vector3.zero || _targetQueue.Count <= 0)
                     return;
 
                 Vector3 moveDist = pos - _lastTouchPos;
@@ -127,7 +157,7 @@ namespace PlayJam.InGame.PickingCabbage
                 switch (target.PickingDir)
                 {
                     case EDir.Left:
-                        if (moveDist.x < -200)
+                        if (moveDist.x < -70)
                         {
                             _targetQueue.Dequeue().Collider2D.enabled = false;
                             target.transform.DOMoveX(-200, 1f);
@@ -145,7 +175,7 @@ namespace PlayJam.InGame.PickingCabbage
                         }
                         break;
                     case EDir.Right:
-                        if (moveDist.x < 200)
+                        if (moveDist.x > 70)
                         {
                             _targetQueue.Dequeue().Collider2D.enabled = false;
                             target.transform.DOMoveX(200, 1f);

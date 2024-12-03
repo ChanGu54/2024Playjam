@@ -7,19 +7,22 @@ namespace PlayJam.InGame.SprinkleCocoaPowder
     /// <summary>
     /// 
     /// </summary>
-    [CreateAssetMenu(fileName = "MiniGame", menuName = "PlayJam/Scriptable Object/MiniGames/ÄÚÄÚ¾Æ ÆÄ¿ì´õ »Ñ¸®±â(SprinkleCocoaPowderData)", order = int.MaxValue)]
+    [CreateAssetMenu(fileName = "MiniGame", menuName = "PlayJam/Scriptable Object/MiniGames/ï¿½ï¿½ï¿½Ú¾ï¿½ ï¿½Ä¿ï¿½ï¿½ ï¿½Ñ¸ï¿½ï¿½ï¿½(SprinkleCocoaPowderData)", order = int.MaxValue)]
     public class SprinkleCocoaPowderData : MiniGameData
     {
-        [Header("Å¬¸®¾î±îÁö ¸ğ¾Æ¾ß ÇÒ Á¡¼ö")]
+        [Header("í´ë¦¬ì–´ ìš”êµ¬ ì ìˆ˜")]
         public int ClearScore = 10;
 
-        [Header("ÅÍÄ¡ ÇÑ ¹øÀ¸·Î ¹ŞÀ» ¼ö ÀÖ´Â ÃÖ´ë Á¡¼ö (ÆòÇà¿¡ °¡±î¿î »óÅÂ)")]
+        [Header("í´ë¦¬ì–´ ìš”êµ¬ ì ìˆ˜ ê°€ì¤‘ì¹˜")]
+        public int ClearScoreWeight = 10;
+
+        [Header("í„°ì¹˜ 1íšŒë‹¹ ë°›ì„ ìˆ˜ ìˆëŠ” ìµœëŒ€ ì ìˆ˜")]
         public float MaxScorePerTouch = 1;
 
-        [Header("ÅÍÄ¡ ÇÑ ¹øÀ¸·Î ¹ŞÀ» ¼ö ÀÖ´Â ÃÖ¼Ò Á¡¼ö (ÆòÇà°ú ¸Õ »óÅÂ)")]
-        public float MinScorePerTouch = 0.5f;
+        [Header("í„°ì¹˜ 1íšŒë‹¹ ë°›ì„ ìˆ˜ ìˆëŠ” ìµœì†Œ ì ìˆ˜")]
+        public float MinScorePerTouch = 0.1f;
 
-        [Header("ÃÖ´ë È¸Àü °¢µµ")]
+        [Header("ìµœëŒ€ íšŒì „ ê°")]
         public int MaxRotationDegree = 15;
     }
 }

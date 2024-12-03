@@ -55,7 +55,7 @@ namespace PlayJam.InGame
         public IEnumerator Co_StartGame(bool isTestGame)
         {
             if (_worldManager == null)
-                _worldManager = GameObject.Find("WorldManager").GetComponent<WorldManager>();
+                _worldManager = GameObject.Find("WorldManager")?.GetComponent<WorldManager>();
 
             if (isTestGame == true)
                 MiniGameSharedData.Instance.Initialize(_miniGameConfig, _miniGames, _isTesting, _testTarget);
@@ -72,8 +72,11 @@ namespace PlayJam.InGame
 
 
             // Datas should be refreshed first.
-            OnMiniGameStart.AddListener(_worldManager.HideAnimGrass);
-            OnMiniGameEnd.AddListener((b) => _worldManager.ShowAnimGrass());
+            if (_worldManager != null)
+            {
+                OnMiniGameStart.AddListener(_worldManager.HideAnimGrass);
+                OnMiniGameEnd.AddListener((b) => _worldManager.ShowAnimGrass());
+            }
 
             OnMiniGamePrevStart.AddListener(MiniGameSharedData.Instance.OnMiniGamePrevStart);
             OnMiniGameStart.AddListener(MiniGameSharedData.Instance.OnMiniGameStart);

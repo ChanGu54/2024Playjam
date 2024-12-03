@@ -19,6 +19,9 @@ namespace PlayJam.InGame.CookTakoyaki
         private List<GameObject> _takoyakiObjs;
 
         [SerializeField]
+        private List<GameObject> _trapObjs;
+
+        [SerializeField]
         private GameObject _takoyakiStick;
 
         [SerializeField]
@@ -27,6 +30,7 @@ namespace PlayJam.InGame.CookTakoyaki
         private List<GameObject> _cachedClonedObjs = new List<GameObject>();
 
         private int _activeTakoyakiCount;
+        private int _activeTrapCount;
 
         public override void Clear()
         {
@@ -34,6 +38,7 @@ namespace PlayJam.InGame.CookTakoyaki
 
             _config = null;
             _activeTakoyakiCount = 0;
+            _activeTrapCount = 0;
 
             for (int i = 0; i < _cachedClonedObjs.Count; i++)
             {
@@ -58,23 +63,53 @@ namespace PlayJam.InGame.CookTakoyaki
 
             _activeTakoyakiCount = UnityEngine.Random.Range(_config.TakoyakiMinCount, _config.TakoyakiMaxCount + 1);
             int deactiveTakoyakiCount = _config.TakoyakiMaxCount - _activeTakoyakiCount;
+            _activeTrapCount = 0;
+            int trapAppearPer = _config.TrapAppearStage <= MiniGameSharedData.Instance.StageCount ? _config.TrapAppearPercent + _config.TrapAppearPercentWeight * (MiniGameSharedData.Instance.StageCount - _config.TrapAppearStage) : 0;
+
+            for (int i = 0; i < deactiveTakoyakiCount; i++)
+            {
+                int percent = UnityEngine.Random.Range(1, 100 + 1);
+                if (percent <= trapAppearPer)
+                {
+                    _activeTrapCount++;
+                }
+            }
 
             for (int i = 0; i < _takoyakiObjs.Count; i++)
             {
                 _takoyakiObjs[i].SetActive(false);
             }
 
-            List<int> indicesToActive = Enumerable.Range(0, _takoyakiObjs.Count).ToList();
+            for (int i = 0; i < _trapObjs.Count; i++)
+            {
+                _trapObjs[i].SetActive(false);
+            }
+
+            List<int> indicesToActiveTako = Enumerable.Range(0, _takoyakiObjs.Count).ToList();
+            List<int> indicesToActiveTrap = new List<int>();
+
             while (deactiveTakoyakiCount > 0)
             {
-                int removeIndex = UnityEngine.Random.Range(0, indicesToActive.Count);
-                indicesToActive.RemoveAt(removeIndex);
+                int removeIndex = UnityEngine.Random.Range(0, indicesToActiveTako.Count);
+                indicesToActiveTrap.Add(indicesToActiveTako[removeIndex]);
+                indicesToActiveTako.RemoveAt(removeIndex);
                 deactiveTakoyakiCount--;
             }
 
-            for (int i = 0; i < indicesToActive.Count; i++)
+            for (int i = 0; i < indicesToActiveTako.Count; i++)
             {
-                _takoyakiObjs[indicesToActive[i]].SetActive(true);
+                _takoyakiObjs[indicesToActiveTako[i]].SetActive(true);
+            }
+
+            while (_activeTrapCount != indicesToActiveTrap.Count)
+            {
+                int removeIndex = UnityEngine.Random.Range(0, indicesToActiveTrap.Count);
+                indicesToActiveTrap.RemoveAt(removeIndex);
+            }
+
+            for (int i = 0; i < indicesToActiveTrap.Count; i++)
+            {
+                _trapObjs[indicesToActiveTrap[i]].SetActive(true);
             }
         }
 
@@ -134,9 +169,12 @@ namespace PlayJam.InGame.CookTakoyaki
 
                 for (int j = 0; j < _touchPoints.Count; j++)
                 {
-                    if (_takoyakiObjs[j].activeSelf == true && hit != null && hit == _touchPoints[j])
+                    if (hit != null && hit == _touchPoints[j])
                     {
-                        StartCoroutine(Co_TakeOutTakoyaki(j));
+                        if (_takoyakiObjs[j].activeSelf == true)
+                            StartCoroutine(Co_TakeOutTakoyaki(j));
+                        else if (_trapObjs[j].activeSelf == true)
+                            StartCoroutine(Co_TakeOutTrap(j));
                     }
                 }
             }
@@ -186,6 +224,40 @@ namespace PlayJam.InGame.CookTakoyaki
                 // 연출 보여줄거면 보여주고 게임 종료
                 StartCoroutine(OnSuccess(() => MiniGameManager.OnMiniGameEnd.Invoke(true)));
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private IEnumerator Co_TakeOutTrap(int inIndex)
+        {
+            _activeTrapCount--;
+            MiniGameManager.OnMiniGamePause.Invoke();
+
+            GameObject clonedTrap = Instantiate(_trapObjs[inIndex], _trapObjs[inIndex].transform.parent);
+            clonedTrap.transform.localPosition = Vector3.zero;
+            _trapObjs[inIndex].SetActive(false);
+
+            _cachedClonedObjs.Add(clonedTrap);
+
+            WaitForSignal flag = new WaitForSignal();
+            Vector3 startPos = new Vector3(clonedTrap.transform.position.x / 2f, -700, -3);
+
+            GameObject clonedTakoyakiStick = Instantiate(_takoyakiStick, _takoyakiStick.transform.parent);
+            clonedTakoyakiStick.transform.localPosition = startPos;
+            _cachedClonedObjs.Add(clonedTakoyakiStick);
+
+            clonedTakoyakiStick.transform.DOMove(clonedTrap.transform.position, 0.3f).SetEase(Ease.InOutQuad).onComplete = flag.Signal;
+            yield return flag.Wait();
+
+            clonedTrap.transform.SetParent(clonedTakoyakiStick.transform);
+            clonedTrap.transform.localPosition = new(0, 0, -1);
+
+            clonedTakoyakiStick.transform.DOMove(startPos, 0.3f).SetEase(Ease.InQuad).onComplete = flag.Signal;
+            yield return flag.Wait();
+
+            // 연출 보여줄거면 보여주고 게임 종료
+            StartCoroutine(OnFail(() => MiniGameManager.OnMiniGameEnd.Invoke(false)));
         }
     }
 }

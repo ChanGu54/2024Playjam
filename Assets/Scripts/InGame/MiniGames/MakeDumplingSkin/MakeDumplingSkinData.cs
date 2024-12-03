@@ -11,6 +11,9 @@ namespace PlayJam.InGame.MakeDumplingSkin
     public class MakeDumplingSkinData : MiniGameData
     {
         [Header("클리어 하기 위해 밀대가 이동해야 할 거리")]
-        public float ClearDistance;
+        public float ClearDistance = 2700;
+
+        [Header("밀대 이동 거리 가중치")]
+        public float ClearDistanceWeight = 10;
     }
 }

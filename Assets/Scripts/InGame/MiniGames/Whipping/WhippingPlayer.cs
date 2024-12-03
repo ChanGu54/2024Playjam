@@ -5,6 +5,7 @@ using DG.Tweening;
 using PlayJam.Character;
 using static UnityEngine.EventSystems.EventTrigger;
 using System;
+using System.Linq;
 
 namespace PlayJam.InGame.Whipping
 {
@@ -21,6 +22,8 @@ namespace PlayJam.InGame.Whipping
 
         [SerializeField]
         private List<GameObject> _whipLevelObjs;
+
+        private List<GameObject> _useWhipLevelObjs;
 
         private WhippingData _config;
 
@@ -46,6 +49,8 @@ namespace PlayJam.InGame.Whipping
             {
                 _whipLevelObjs[i].SetActive(false);
             }
+
+            _useWhipLevelObjs?.Clear();
         }
 
         /// <summary>
@@ -61,11 +66,23 @@ namespace PlayJam.InGame.Whipping
             if (_config == null)
                 return;
 
-            _requireSpinCount = _config.WhippingCount + _config.IncreaseCountPerStageCount * MiniGameSharedData.Instance.StageCount;
+            int addedSpinCount = _config.IncreaseCountPerStageCount * MiniGameSharedData.Instance.StageCount;
+            int startWhipLevel = 2;
+            if (addedSpinCount > 5)
+            {
+                startWhipLevel = 1;
+            }
+            else if (addedSpinCount > 10)
+            {
+                startWhipLevel = 0;
+            }
+
+            _useWhipLevelObjs = _whipLevelObjs.Skip(startWhipLevel).ToList();
+            _requireSpinCount = _config.WhippingCount + addedSpinCount;
 
             for (int i = 0; i < _whipLevelObjs.Count; i++)
             {
-                if (i == 0)
+                if (i == startWhipLevel)
                     _whipLevelObjs[i].SetActive(true);
                 else
                     _whipLevelObjs[i].SetActive(false);
@@ -240,18 +257,18 @@ namespace PlayJam.InGame.Whipping
 
                     int activeVisualIdx = 0;
 
-                    for (int i = _whipLevelObjs.Count - 1; i >= 0; i--)
+                    for (int i = _useWhipLevelObjs.Count - 1; i >= 0; i--)
                     {
-                        if ((float)_currentSpinCount / _requireSpinCount >= (float)i / (_whipLevelObjs.Count - 1))
+                        if ((float)_currentSpinCount / _requireSpinCount >= (float)i / (_useWhipLevelObjs.Count - 1))
                         {
                             activeVisualIdx = i;
                             break;
                         }
                     }
 
-                    for (int i = 0; i < _whipLevelObjs.Count; i++)
+                    for (int i = 0; i < _useWhipLevelObjs.Count; i++)
                     {
-                        _whipLevelObjs[i].SetActive(activeVisualIdx == i);
+                        _useWhipLevelObjs[i].SetActive(activeVisualIdx == i);
                     }
 
                     if (_currentSpinCount >= _requireSpinCount)

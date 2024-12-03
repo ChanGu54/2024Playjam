@@ -38,6 +38,9 @@ namespace PlayJam.World
         private Animator _animGrass;
 
         [SerializeField]
+        private Animator _animAri;
+
+        [SerializeField]
         private GameObject _worldUI;
 
         [SerializeField]
@@ -79,11 +82,13 @@ namespace PlayJam.World
         public void OnGameStart()
         {
             _worldUI.gameObject.SetActive(false);
+            _animAri.Play("Fly_Out");
         }
 
         public void OnGameEnd()
         {
             _worldUI.gameObject.SetActive(true);
+            _animAri.Play("Fly_In");
             ShowAnimGrass();
         }
 

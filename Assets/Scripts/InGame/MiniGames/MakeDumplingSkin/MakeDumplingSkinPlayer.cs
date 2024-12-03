@@ -56,7 +56,7 @@ namespace PlayJam.InGame.MakeDumplingSkin
             _config = inConfig as MakeDumplingSkinData;
 
             _curMoveDistance = 0;
-            _objectiveMoveDistance = _config.ClearDistance;
+            _objectiveMoveDistance = _config.ClearDistance + _config.ClearDistanceWeight * MiniGameSharedData.Instance.StageCount;
         }
 
         /// <summary>

@@ -91,6 +91,8 @@ namespace PlayJam.InGame.CuttingCabbage
             if (_target == null)
                 return;
 
+            _target.CuttingCount = UnityEngine.Random.Range(_target.CuttingMinCount, _target.CuttingMaxCount);
+
             for (int i = 0; i < _cuttingPrefabs.Count; i++)
             {
                 if (_target.Element == _cuttingPrefabs[i].Element)
