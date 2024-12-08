@@ -148,7 +148,7 @@ namespace PlayJam.InGame.SprinkleCocoaPowder
                 float moveRotation = _config.MaxRotationDegree * normalizedRotateVal;
                 _curDegree = Mathf.Clamp(_curDegree + moveRotation, -_config.MaxRotationDegree, _config.MaxRotationDegree);
                 _touchSpriteRenderer.transform.rotation = Quaternion.Euler(new Vector3(0, 0, _curDegree));
-                _curScore += Mathf.Lerp(_config.MinScorePerTouch, _config.MaxScorePerTouch, Mathf.Abs(_curDegree / _config.MaxRotationDegree));
+                _curScore += Mathf.Lerp(_config.MinScorePerTouch, _config.MaxScorePerTouch, 1 - Mathf.Abs(_curDegree / _config.MaxRotationDegree));
                 PlayPowderEffect();
 
                 if (_curScore >= _config.ClearScore + _config.ClearScoreWeight * MiniGameSharedData.Instance.StageCount)
