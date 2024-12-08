@@ -38,6 +38,7 @@ public class UserDataHelper
         set
         {
             PlayerPrefs.GetString("KEY_ID", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -53,6 +54,7 @@ public class UserDataHelper
         set
         {
             PlayerPrefs.GetString("KEY_NAME", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -68,6 +70,7 @@ public class UserDataHelper
         set
         {
             PlayerPrefs.SetInt("KEY_EquippedCostume", (int)value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -83,6 +86,7 @@ public class UserDataHelper
         set
         {
             PlayerPrefs.SetInt("KEY_Coin", value);
+            PlayerPrefs.Save();
         }
     }
 
@@ -98,6 +102,7 @@ public class UserDataHelper
         set
         {
             PlayerPrefs.SetInt("KEY_BGM", value ? 0 : 1);
+            PlayerPrefs.Save();
         }
     }
 
@@ -113,8 +118,11 @@ public class UserDataHelper
         set
         {
             PlayerPrefs.SetInt("KEY_BGM", value ? 0 : 1);
+            PlayerPrefs.Save();
         }
     }
+
+    public int CostumeCost => 1500;
 
     /// <summary>
     /// 
@@ -144,6 +152,7 @@ public class UserDataHelper
         Name = UnityEngine.Random.Range(1000000000, int.MaxValue).ToString();
 
         PlayerPrefs.SetString("KEY_OwnedCostumes", string.Empty);
+        PlayerPrefs.Save();
     }
 
     private ECostume[] _ownedCostumes;
@@ -160,7 +169,10 @@ public class UserDataHelper
             if (string.IsNullOrEmpty(phrase))
             {
                 _ownedCostumes = new ECostume[] { ECostume.IDLE };
-                PlayerPrefs.SetString("KEY_OwnedCostumes", string.Join(',', _ownedCostumes));
+                int[] ownedCostumesInt = Array.ConvertAll(_ownedCostumes, e => (int)e);
+                PlayerPrefs.SetString("KEY_OwnedCostumes", string.Join(',', ownedCostumesInt));
+                phrase = PlayerPrefs.GetString("KEY_OwnedCostumes");
+                PlayerPrefs.Save();
             }
 
             string delimiter = ",";
@@ -176,7 +188,9 @@ public class UserDataHelper
     /// <param name="inCostumes"></param>
     public void OverrideOwnedCostumes(ECostume[] inCostumes)
     {
-        PlayerPrefs.SetString("KEY_OwnedCostumes", string.Join(',', inCostumes));
+        int[] ownedCostumesInt = Array.ConvertAll(inCostumes, e => (int)e);
+        PlayerPrefs.SetString("KEY_OwnedCostumes", string.Join(',', ownedCostumesInt));
+        PlayerPrefs.Save();
         _ownedCostumes = inCostumes;
     }
 
@@ -196,6 +210,8 @@ public class UserDataHelper
         }
 
         _ownedCostumes.Append(inCostume);
-        PlayerPrefs.SetString("KEY_OwnedCostumes", string.Join(',', _ownedCostumes));
+        int[] ownedCostumesInt = Array.ConvertAll(_ownedCostumes, e => (int)e);
+        PlayerPrefs.SetString("KEY_OwnedCostumes", string.Join(',', ownedCostumesInt));
+        PlayerPrefs.Save();
     }
 }

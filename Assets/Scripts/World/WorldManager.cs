@@ -54,7 +54,6 @@ namespace PlayJam.World
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
 
-            _characterShown.SetCostume(UserDataHelper.Instance.EquippedCostume);
             _btnStart.onClick.AddListener(OnClickBtnStart);
             _btnRank.onClick.AddListener(OnClickBtnRank);
             _btnGameList.onClick.AddListener(OnClickBtnGameList);
@@ -62,6 +61,7 @@ namespace PlayJam.World
             _btnSettings.onClick.AddListener(OnClickBtnSettings);
 
             RefreshCoinCount();
+            RefreshCostume();
         }
 
         private void OnClickBtnStart()
@@ -121,6 +121,8 @@ namespace PlayJam.World
         {
             if (_isPlaying == true)
                 return;
+
+            PopupManager.Instance.Show<PopupCostume>();
         }
 
         private void OnClickBtnSettings()
@@ -131,6 +133,11 @@ namespace PlayJam.World
         public void RefreshCoinCount()
         {
             _txtCarrot.text = UserDataHelper.Instance.Coin.ToString();
+        }
+
+        public void RefreshCostume()
+        {
+            _characterShown.SetCostume(UserDataHelper.Instance.EquippedCostume);
         }
     }
 }

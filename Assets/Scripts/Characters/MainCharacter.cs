@@ -122,6 +122,9 @@ namespace PlayJam.Character
         [SerializeField]
         private SerializedDictionary<EAddOn, GameObject> _addOnDic;
 
+        [SerializeField]
+        private ECostume _costume;
+
         /// <summary>
         /// 
         /// </summary>
@@ -172,6 +175,8 @@ namespace PlayJam.Character
 
         public void SetCostume(ECostume inCostume)
         {
+            _costume = inCostume;
+
             switch (inCostume)
             {
                 case ECostume.IDLE:
@@ -184,7 +189,7 @@ namespace PlayJam.Character
                     Initialize(EArm.CAT, EBody.CAT, EHat.CAT, EAddOn.IDLE, false);
                     break;
                 case ECostume.CHEF:
-                    Initialize(EArm.CAT, EBody.CAT, EHat.CAT, EAddOn.IDLE, false);
+                    Initialize(EArm.CHEF, EBody.CHEF, EHat.CHEF, EAddOn.IDLE, false);
                     break;
                 case ECostume.COOLCHEF:
                     Initialize(EArm.COOLCHEF, EBody.COOLCHEF, EHat.COOLCHEF, EAddOn.COOLCHEF, false);
