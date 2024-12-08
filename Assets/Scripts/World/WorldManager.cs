@@ -115,6 +115,8 @@ namespace PlayJam.World
         {
             if (_isPlaying == true)
                 return;
+
+            PopupManager.Instance.Show<PopupComingSoon>();
         }
 
         private void OnClickBtnCostume()

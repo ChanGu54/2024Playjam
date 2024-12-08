@@ -79,7 +79,7 @@ namespace PlayJam.Popup
                 }
 
                 _dimmed.gameObject.SetActive(true);
-                _tweenInstance = DOTween.ToAlpha(() => _dimmed.color, x => _dimmed.color = x, 0.9f, 0.5f).OnComplete(() =>
+                _tweenInstance = DOTween.ToAlpha(() => _dimmed.color, x => _dimmed.color = x, 0.9f, 1 / 6f).OnComplete(() =>
                 {
                     _tweenInstance = null;
                 });
@@ -114,7 +114,7 @@ namespace PlayJam.Popup
                 _tweenInstance = null;
             }
 
-            _tweenInstance = DOTween.ToAlpha(() => _dimmed.color, x => _dimmed.color = x, 0, 0.5f).OnComplete(() => {
+            _tweenInstance = DOTween.ToAlpha(() => _dimmed.color, x => _dimmed.color = x, 0, 1 / 6f).OnComplete(() => {
                 _dimmed.gameObject.SetActive(false);
                 _tweenInstance = null;
             });
