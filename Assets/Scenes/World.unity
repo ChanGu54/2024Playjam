@@ -1722,22 +1722,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5179914327385787546, guid: 19abb085826c845459a7a4c2b649570d, type: 3}
-      propertyPath: sfxSounds.Array.size
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 5179914327385787546, guid: 19abb085826c845459a7a4c2b649570d, type: 3}
-      propertyPath: sfxSounds.Array.data[11]
-      value: 
-      objectReference: {fileID: 8300000, guid: 9a7359e8705d29647bb920a8b24b1c38, type: 3}
-    - target: {fileID: 5179914327385787546, guid: 19abb085826c845459a7a4c2b649570d, type: 3}
-      propertyPath: sfxSounds.Array.data[12]
-      value: 
-      objectReference: {fileID: 8300000, guid: 164a54e2935cc504da9efb00d7f53a26, type: 3}
-    - target: {fileID: 5179914327385787546, guid: 19abb085826c845459a7a4c2b649570d, type: 3}
-      propertyPath: sfxSounds.Array.data[13]
-      value: 
-      objectReference: {fileID: 8300000, guid: 25c18f1a6274e89489a9117dddcd26bd, type: 3}
     - target: {fileID: 5846527111658218070, guid: 19abb085826c845459a7a4c2b649570d, type: 3}
       propertyPath: m_Name
       value: SoundManager
