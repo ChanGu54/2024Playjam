@@ -10812,10 +10812,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 4844104943032966825, guid: 314a0f7934fbc4cc5b2cc638476fb440, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 18
-      objectReference: {fileID: 0}
     - target: {fileID: 4850410525042650529, guid: 314a0f7934fbc4cc5b2cc638476fb440, type: 3}
       propertyPath: m_SortingOrder
       value: 1
