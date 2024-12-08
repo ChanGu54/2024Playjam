@@ -25,11 +25,13 @@ namespace PlayJam.InGame
 
         public virtual IEnumerator OnPause()
         {
+            IsPlaying = false;
             yield return null;
         }
 
         public virtual IEnumerator OnResume()
         {
+            IsPlaying = true;
             yield return null;
         }
 

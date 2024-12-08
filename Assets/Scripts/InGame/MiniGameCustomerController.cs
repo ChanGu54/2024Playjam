@@ -20,6 +20,14 @@ namespace PlayJam.InGame
         [SerializeField]
         private List<Customer> _allCustomers;
 
+        [SerializeField]
+        private GameObject _carrotPrefab;
+
+        [SerializeField]
+        private RectTransform _rtDish;
+
+        private List<GameObject> _carrotList = new List<GameObject>();
+
         private List<Customer> _customerList = new List<Customer>();
 
         /// <summary>
@@ -35,6 +43,13 @@ namespace PlayJam.InGame
             }
 
             _customerList.Clear();
+
+            for (int i = 0; i < _carrotList.Count; i++)
+            {
+                Destroy(_carrotList[i].gameObject);
+            }
+
+            _carrotList.Clear();
         }
 
         /// <summary>
@@ -146,6 +161,15 @@ namespace PlayJam.InGame
                     _customerList[i].transform.DOLocalMoveX(_customerList[i].transform.localPosition.x - 200, moveTimePerCustomerPos).SetEase(Ease.Linear);
                 else
                     _customerList[i].transform.DOLocalMoveX(_customerList[i].transform.localPosition.x - 140, moveTimePerCustomerPos).SetEase(Ease.Linear);
+            }
+
+            if (isSuccess == true && _carrotList.Count <= 20)
+            {
+                GameObject carrot = Instantiate(_carrotPrefab, _carrotPrefab.transform.parent);
+                carrot.SetActive(true);
+                (carrot.transform as RectTransform).anchoredPosition = new Vector2(Random.Range(-5f, 35f), Random.Range(0, 10f));
+                carrot.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+                _carrotList.Add(carrot);
             }
         }
 

@@ -158,6 +158,9 @@ namespace PlayJam.InGame
 
         public void OnMiniGameQuit()
         {
+            UserDataHelper.Instance.Coin += Mathf.Max(0, 100 * (Instance.StageCount - 1));
+            MiniGameManager.WorldManager.RefreshCoinCount();
+
             Clear();
         }
 

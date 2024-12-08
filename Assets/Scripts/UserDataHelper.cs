@@ -37,7 +37,7 @@ public class UserDataHelper
         }
         set
         {
-            PlayerPrefs.GetString("KEY_ID", value);
+            PlayerPrefs.SetString("KEY_ID", value);
             PlayerPrefs.Save();
         }
     }
@@ -53,7 +53,7 @@ public class UserDataHelper
         }
         set
         {
-            PlayerPrefs.GetString("KEY_NAME", value);
+            PlayerPrefs.SetString("KEY_NAME", value);
             PlayerPrefs.Save();
         }
     }
