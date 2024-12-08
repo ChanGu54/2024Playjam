@@ -1,9 +1,6 @@
 using DG.Tweening;
-using PlayJam.Utils;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace PlayJam.InGame.SprinkleCocoaPowder

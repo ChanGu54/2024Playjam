@@ -163,7 +163,7 @@ namespace PlayJam.InGame
                     _customerList[i].transform.DOLocalMoveX(_customerList[i].transform.localPosition.x - 140, moveTimePerCustomerPos).SetEase(Ease.Linear);
             }
 
-            if (isSuccess == true && _carrotList.Count <= 20)
+            if (isSuccess == true && _carrotList.Count <= 20 && _carrotPrefab != null)
             {
                 GameObject carrot = Instantiate(_carrotPrefab, _carrotPrefab.transform.parent);
                 carrot.SetActive(true);

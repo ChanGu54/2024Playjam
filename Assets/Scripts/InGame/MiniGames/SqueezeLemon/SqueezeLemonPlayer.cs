@@ -4,33 +4,24 @@ using UnityEngine;
 using System;
 using System.Linq;
 
-namespace PlayJam.InGame.Whipping
+namespace PlayJam.InGame.SqueezeLemon
 {
     /// <summary>
     /// 
     /// </summary>
-    public class WhippingPlayer : MiniGamePlayer
+    public class SqueezeLemonPlayer : MiniGamePlayer
     {
         [SerializeField]
-        private Transform _trWhip;
+        private Transform _trLemonLiquid;
 
         [SerializeField]
-        private Transform _trWhipCenter;
+        private Transform _trLemon;
 
-        [SerializeField]
-        private List<GameObject> _whipLevelObjs;
-
-        private List<GameObject> _useWhipLevelObjs;
-
-        private WhippingData _config;
+        private SqueezeLemonData _config;
 
         private int _currentSpinCount;
 
         private int _requireSpinCount;
-
-        private float radiusX = 62f;
-
-        private float radiusY = 32f;
 
         private Vector3 _vecCenter;
 
@@ -41,13 +32,7 @@ namespace PlayJam.InGame.Whipping
             _config = null;
             _currentSpinCount = 0;
             _requireSpinCount = 0;
-
-            for (int i = 0; i < _whipLevelObjs.Count; i++)
-            {
-                _whipLevelObjs[i].SetActive(false);
-            }
-
-            _useWhipLevelObjs?.Clear();
+            _vecCenter = Vector3.zero;
         }
 
         /// <summary>
@@ -58,34 +43,18 @@ namespace PlayJam.InGame.Whipping
         {
             base.Initialize(inConfig);
 
-            _config = inConfig as WhippingData;
+            _config = inConfig as SqueezeLemonData;
 
             if (_config == null)
                 return;
 
             int addedSpinCount = _config.IncreaseCountPerStageCount * MiniGameSharedData.Instance.StageCount;
-            int startWhipLevel = 2;
-            if (addedSpinCount > 5)
-            {
-                startWhipLevel = 1;
-            }
-            else if (addedSpinCount > 10)
-            {
-                startWhipLevel = 0;
-            }
 
-            _useWhipLevelObjs = _whipLevelObjs.Skip(startWhipLevel).ToList();
-            _requireSpinCount = _config.WhippingCount + addedSpinCount;
+            _requireSpinCount = _config.SqueezeCount + addedSpinCount;
 
-            for (int i = 0; i < _whipLevelObjs.Count; i++)
-            {
-                if (i == startWhipLevel)
-                    _whipLevelObjs[i].SetActive(true);
-                else
-                    _whipLevelObjs[i].SetActive(false);
-            }
-
-            _trWhip.localPosition = new Vector3(134, -393, -2);
+            _trLemonLiquid.localScale = Vector3.zero;
+            _trLemon.rotation = Quaternion.Euler(Vector3.zero);
+            _vecCenter = _trLemon.transform.position;
         }
 
         /// <summary>
@@ -97,23 +66,6 @@ namespace PlayJam.InGame.Whipping
             yield return new WaitForSeconds(0.5f);
 
             MiniGameManager.OnMiniGamePostStart.Invoke();
-        }
-
-        /// <summary>
-        /// 타원의 좌표 구하기
-        /// </summary>
-        /// <param name="angle"></param>
-        /// <returns></returns>
-        private Vector3 GetEllipsePointAtAngle(float angle)
-        {
-            // 각도를 라디안 값으로 변환
-            float radians = angle * Mathf.Deg2Rad;
-
-            // 타원의 테두리 좌표 계산
-            float x = _trWhipCenter.position.x + radiusX * Mathf.Cos(radians);
-            float y = _trWhipCenter.position.y + radiusY * Mathf.Sin(radians);
-
-            return new Vector3(x, y, 0f);
         }
 
         Vector3 _touchStartPos = Vector3.zero;
@@ -199,32 +151,24 @@ namespace PlayJam.InGame.Whipping
             if (touch.phase == TouchPhase.Began)
             {
                 _touchStartPos = pos;
-                _vecCenter = Vector3.zero;
+
+                _cachedStartAngle = GetAngleBetweenNormals(_vecCenter, _touchStartPos, _vecCenter + Vector3.right);
+                _arriveMinAngle = _arriveMinAngle - _config.CheckpointCorrection < 0 ? _arriveMinAngle - _config.CheckpointCorrection + 360 : _arriveMinAngle - _config.CheckpointCorrection;
+                _arriveMaxAngle = _arriveMinAngle + _config.CheckpointCorrection > 360 ? _arriveMinAngle + _config.CheckpointCorrection - 360 : _arriveMinAngle + _config.CheckpointCorrection;
+
+                _checkpointAngle = (_cachedStartAngle + 180) % 360;
+
+                _checkpointMinAngle = _checkpointAngle - _config.CheckpointCorrection < 0 ? _checkpointAngle - _config.CheckpointCorrection + 360 : _checkpointAngle - _config.CheckpointCorrection;
+                _checkpointMaxAngle = _checkpointAngle + _config.CheckpointCorrection > 360 ? _checkpointAngle + _config.CheckpointCorrection - 360 : _checkpointAngle + _config.CheckpointCorrection;
+
                 return;
             }
             else if (touch.phase == TouchPhase.Moved)
             {
                 if (_touchStartPos == Vector3.zero)
+                {
                     _touchStartPos = pos;
 
-                if (_vecCenter == Vector3.zero)
-                {
-                    int centerWeight = 0;
-
-                    if (pos.y > _touchStartPos.y)
-                    {
-                        centerWeight = 200;
-                    }
-                    else if (pos.y < _touchStartPos.y)
-                    {
-                        centerWeight = -200;
-                    }
-                    else
-                    {
-                        return;
-                    }
-
-                    _vecCenter = new Vector2(0, _touchStartPos.y + centerWeight);
                     _cachedStartAngle = GetAngleBetweenNormals(_vecCenter, _touchStartPos, _vecCenter + Vector3.right);
                     _arriveMinAngle = _arriveMinAngle - _config.CheckpointCorrection < 0 ? _arriveMinAngle - _config.CheckpointCorrection + 360 : _arriveMinAngle - _config.CheckpointCorrection;
                     _arriveMaxAngle = _arriveMinAngle + _config.CheckpointCorrection > 360 ? _arriveMinAngle + _config.CheckpointCorrection - 360 : _arriveMinAngle + _config.CheckpointCorrection;
@@ -235,9 +179,11 @@ namespace PlayJam.InGame.Whipping
                     _checkpointMaxAngle = _checkpointAngle + _config.CheckpointCorrection > 360 ? _checkpointAngle + _config.CheckpointCorrection - 360 : _checkpointAngle + _config.CheckpointCorrection;
                 }
 
-                _cachedCurAngle = GetAngleBetweenNormals(new Vector2(_vecCenter.x, _vecCenter.y), pos, _vecCenter + Vector3.right);
-                Vector3 whipPos = GetEllipsePointAtAngle(_cachedCurAngle);
-                _trWhip.transform.localPosition = whipPos;
+                _cachedCurAngle = GetAngleBetweenNormals(_vecCenter, pos, _vecCenter + Vector3.right);
+
+                Debug.Log(_cachedCurAngle);
+
+                _trLemon.transform.rotation = Quaternion.AngleAxis(_cachedCurAngle, Vector3.forward);
 
                 if (_isCheckpointReached == false && _checkpointMinAngle < _cachedCurAngle && _checkpointMaxAngle > _cachedCurAngle)
                 {
@@ -250,23 +196,9 @@ namespace PlayJam.InGame.Whipping
                     _isCheckpointReached = false;
                     _currentSpinCount++;
 
+                    _trLemonLiquid.transform.localScale = Vector3.Lerp(new Vector3(0.5f, 0.5f, 1), Vector3.one, (float)_currentSpinCount / _requireSpinCount);
+
                     Debug.Log($"{_currentSpinCount}, {_requireSpinCount}");
-
-                    int activeVisualIdx = 0;
-
-                    for (int i = _useWhipLevelObjs.Count - 1; i >= 0; i--)
-                    {
-                        if ((float)_currentSpinCount / _requireSpinCount >= (float)i / (_useWhipLevelObjs.Count - 1))
-                        {
-                            activeVisualIdx = i;
-                            break;
-                        }
-                    }
-
-                    for (int i = 0; i < _useWhipLevelObjs.Count; i++)
-                    {
-                        _useWhipLevelObjs[i].SetActive(activeVisualIdx == i);
-                    }
 
                     if (_currentSpinCount >= _requireSpinCount)
                     {

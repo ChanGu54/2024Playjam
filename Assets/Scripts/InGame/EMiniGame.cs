@@ -44,4 +44,9 @@ public enum EMiniGame
     /// 코코아 파우더 뿌리기
     /// </summary>
     SprinkleCocoaPowder,
+
+    /// <summary>
+    /// 레몬 짜기
+    /// </summary>
+    SqueezeLemon,
 }

@@ -44,4 +44,9 @@ public enum EFood
     /// 티라미수
     /// </summary>
     Tiramisu,
+
+    /// <summary>
+    /// 레몬 쥬스
+    /// </summary>
+    LemonJuice,
 }
