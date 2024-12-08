@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using PlayJam.Character;
 using PlayJam.InGame;
+using PlayJam.Popup;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -124,8 +125,7 @@ namespace PlayJam.World
 
         private void OnClickBtnSettings()
         {
-            if (_isPlaying == true)
-                return;
+            PopupManager.Instance.Show<PopupSettings>();
         }
 
         public void RefreshCoinCount()

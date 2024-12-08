@@ -14,6 +14,7 @@ public class UserDataHelper
             if (_instance == null)
             {
                 _instance = new UserDataHelper();
+                _instance.Initialize();
             }
 
             return _instance;
@@ -24,6 +25,36 @@ public class UserDataHelper
     /// 유저 ID
     /// </summary>
     public string ID => SystemInfo.deviceUniqueIdentifier;
+
+    /// <summary>
+    /// 유저 ID
+    /// </summary>
+    public string SAVED_ID
+    {
+        get
+        {
+            return PlayerPrefs.GetString("KEY_ID");
+        }
+        set
+        {
+            PlayerPrefs.GetString("KEY_ID", value);
+        }
+    }
+
+    /// <summary>
+    /// 유저 ID
+    /// </summary>
+    public string Name
+    {
+        get
+        {
+            return PlayerPrefs.GetString("KEY_NAME");
+        }
+        set
+        {
+            PlayerPrefs.GetString("KEY_NAME", value);
+        }
+    }
 
     /// <summary>
     /// 현재 장비한 코스튬
@@ -53,6 +84,66 @@ public class UserDataHelper
         {
             PlayerPrefs.SetInt("KEY_Coin", value);
         }
+    }
+
+    /// <summary>
+    /// BGM 켜져 있는지
+    /// </summary>
+    public bool IsBGMOn
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("KEY_BGM") == 0;
+        }
+        set
+        {
+            PlayerPrefs.SetInt("KEY_BGM", value ? 0 : 1);
+        }
+    }
+
+    /// <summary>
+    /// SFX 켜져 있는지
+    /// </summary>
+    public bool IsSFXOn
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("KEY_BGM") == 0;
+        }
+        set
+        {
+            PlayerPrefs.SetInt("KEY_BGM", value ? 0 : 1);
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void Initialize()
+    {
+        if (SAVED_ID != ID)
+        {
+            Clear();
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void Clear()
+    {
+        IsBGMOn = true;
+        IsSFXOn = true;
+
+        EquippedCostume = ECostume.IDLE;
+
+        Coin = 0;
+
+        SAVED_ID = ID;
+
+        Name = UnityEngine.Random.Range(1000000000, int.MaxValue).ToString();
+
+        PlayerPrefs.SetString("KEY_OwnedCostumes", string.Empty);
     }
 
     private ECostume[] _ownedCostumes;
