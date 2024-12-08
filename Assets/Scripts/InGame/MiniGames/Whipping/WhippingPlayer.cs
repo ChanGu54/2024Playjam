@@ -20,6 +20,9 @@ namespace PlayJam.InGame.Whipping
         [SerializeField]
         private List<GameObject> _whipLevelObjs;
 
+        [SerializeField]
+        private Transform _trCenter;
+
         private List<GameObject> _useWhipLevelObjs;
 
         private WhippingData _config;
@@ -209,22 +212,7 @@ namespace PlayJam.InGame.Whipping
 
                 if (_vecCenter == Vector3.zero)
                 {
-                    int centerWeight = 0;
-
-                    if (pos.y > _touchStartPos.y)
-                    {
-                        centerWeight = 200;
-                    }
-                    else if (pos.y < _touchStartPos.y)
-                    {
-                        centerWeight = -200;
-                    }
-                    else
-                    {
-                        return;
-                    }
-
-                    _vecCenter = new Vector2(0, _touchStartPos.y + centerWeight);
+                    _vecCenter = _trCenter.transform.position;
                     _cachedStartAngle = GetAngleBetweenNormals(_vecCenter, _touchStartPos, _vecCenter + Vector3.right);
                     _arriveMinAngle = _arriveMinAngle - _config.CheckpointCorrection < 0 ? _arriveMinAngle - _config.CheckpointCorrection + 360 : _arriveMinAngle - _config.CheckpointCorrection;
                     _arriveMaxAngle = _arriveMinAngle + _config.CheckpointCorrection > 360 ? _arriveMinAngle + _config.CheckpointCorrection - 360 : _arriveMinAngle + _config.CheckpointCorrection;
