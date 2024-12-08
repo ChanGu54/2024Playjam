@@ -1,4 +1,5 @@
 using DG.Tweening;
+using PlayJam.Sound;
 using PlayJam.Utils;
 using System.Collections;
 using System.Collections.Generic;
@@ -212,6 +213,8 @@ namespace PlayJam.InGame.CookTakoyaki
 
             clonedTakoyakiStick.transform.DOMove(clonedTakoyaki.transform.position, 0.3f).SetEase(Ease.InOutQuad).onComplete = flag.Signal;
             yield return flag.Wait();
+
+            SoundManager.Instance.Play(ESoundType.SFX, "CookTakoyaki");
 
             clonedTakoyaki.transform.SetParent(clonedTakoyakiStick.transform);
             clonedTakoyaki.transform.localPosition = new(0, 0, -1);

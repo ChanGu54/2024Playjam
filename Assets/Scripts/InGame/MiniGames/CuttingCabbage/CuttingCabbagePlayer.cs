@@ -5,6 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
+using PlayJam.Sound;
 
 namespace PlayJam.InGame.CuttingCabbage
 {
@@ -220,6 +221,8 @@ namespace PlayJam.InGame.CuttingCabbage
 
             if (_currentCuttingCount == _target.CuttingCount)
                 isClearStage = true;
+
+            SoundManager.Instance.Play(ESoundType.SFX, "CuttingCabbage");
 
             yield return new WaitForSeconds(animLength);
 

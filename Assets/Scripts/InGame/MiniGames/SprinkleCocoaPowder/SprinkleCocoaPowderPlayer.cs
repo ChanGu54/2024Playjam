@@ -1,4 +1,5 @@
 using DG.Tweening;
+using PlayJam.Sound;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -131,6 +132,8 @@ namespace PlayJam.InGame.SprinkleCocoaPowder
                 }
 
                 Vector3 pos = Camera.main.ScreenToWorldPoint(touch.position);
+
+                SoundManager.Instance.Play(ESoundType.SFX, "SprinkleCocoaPowder");
 
                 // �̹����� �浹 ���� Ȯ��
                 Collider2D hit = Physics2D.OverlapPoint(pos);

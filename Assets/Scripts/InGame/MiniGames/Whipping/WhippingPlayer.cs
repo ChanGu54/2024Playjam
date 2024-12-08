@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using PlayJam.Sound;
 
 namespace PlayJam.InGame.Whipping
 {
@@ -237,6 +238,8 @@ namespace PlayJam.InGame.Whipping
                 {
                     _isCheckpointReached = false;
                     _currentSpinCount++;
+
+                    SoundManager.Instance.Play(ESoundType.SFX, "Whipping");
 
                     Debug.Log($"{_currentSpinCount}, {_requireSpinCount}");
 

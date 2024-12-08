@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using PlayJam.InGame.UI;
+using PlayJam.Sound;
 using PlayJam.Utils;
 using UnityEngine;
 
@@ -117,6 +118,7 @@ namespace PlayJam.InGame
             else
             {
                 MiniGameManager.WorldManager.OnGameEnd();
+                SoundManager.Instance.Play(ESoundType.SFX, "GameOver");
                 MiniGameManager.OnMiniGameQuit.Invoke();
             }
         }

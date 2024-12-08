@@ -1,3 +1,4 @@
+using PlayJam.Sound;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -126,6 +127,8 @@ namespace PlayJam.InGame.CuttingFruit
                 _fragments[i].bodyType = RigidbodyType2D.Dynamic;
                 _fragments[i].gravityScale = GravityScale * 5;
             }
+
+            SoundManager.Instance.Play(ESoundType.SFX, "CuttingFruit");
 
             yield return null;
 

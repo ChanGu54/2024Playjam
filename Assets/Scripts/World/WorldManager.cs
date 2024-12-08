@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using PlayJam.Character;
 using PlayJam.InGame;
 using PlayJam.Popup;
+using PlayJam.Sound;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -60,6 +61,8 @@ namespace PlayJam.World
             _btnCostume.onClick.AddListener(OnClickBtnCostume);
             _btnSettings.onClick.AddListener(OnClickBtnSettings);
 
+            SoundManager.Instance.Play(ESoundType.BGM, "MainBGM", true);
+
             RefreshCoinCount();
             RefreshCostume();
         }
@@ -84,6 +87,8 @@ namespace PlayJam.World
         {
             _worldUI.gameObject.SetActive(false);
             _animAri.Play("Ari_FlyOut");
+
+            SoundManager.Instance.Play(ESoundType.BGM, "GameBGM", true);
         }
 
         public void OnGameEnd()
@@ -91,6 +96,8 @@ namespace PlayJam.World
             _worldUI.gameObject.SetActive(true);
             _animAri.Play("Ari_FlyIn");
             ShowAnimGrass();
+
+            SoundManager.Instance.Play(ESoundType.BGM, "MainBGM", true);
         }
 
         public void HideAnimGrass()

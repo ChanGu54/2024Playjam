@@ -81,7 +81,7 @@ public class UserDataHelper
     {
         get
         {
-            return PlayerPrefs.GetInt("KEY_Coin");
+            return PlayerPrefs.GetInt("KEY_Coin", 0);
         }
         set
         {
@@ -97,7 +97,7 @@ public class UserDataHelper
     {
         get
         {
-            return PlayerPrefs.GetInt("KEY_BGM") == 0;
+            return PlayerPrefs.GetInt("KEY_BGM", 0) == 0;
         }
         set
         {
@@ -113,7 +113,7 @@ public class UserDataHelper
     {
         get
         {
-            return PlayerPrefs.GetInt("KEY_BGM") == 0;
+            return PlayerPrefs.GetInt("KEY_BGM", 0) == 0;
         }
         set
         {

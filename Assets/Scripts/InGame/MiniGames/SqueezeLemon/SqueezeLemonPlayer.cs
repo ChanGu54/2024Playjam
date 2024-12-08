@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using PlayJam.Sound;
 
 namespace PlayJam.InGame.SqueezeLemon
 {
@@ -196,6 +197,8 @@ namespace PlayJam.InGame.SqueezeLemon
                     _isCheckpointReached = false;
                     _currentSpinCount++;
 
+                    SoundManager.Instance.Play(ESoundType.SFX, "SqueezeLemon");
+
                     _trLemonLiquid.transform.localScale = Vector3.Lerp(new Vector3(0.5f, 0.5f, 1), Vector3.one, (float)_currentSpinCount / _requireSpinCount);
 
                     Debug.Log($"{_currentSpinCount}, {_requireSpinCount}");
@@ -209,8 +212,6 @@ namespace PlayJam.InGame.SqueezeLemon
                         StartCoroutine(OnSuccess(() => MiniGameManager.OnMiniGameEnd.Invoke(true)));
                         return;
                     }
-
-
                 }
             }
         }

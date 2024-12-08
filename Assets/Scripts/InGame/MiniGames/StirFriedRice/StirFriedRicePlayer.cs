@@ -1,5 +1,6 @@
 using DG.Tweening;
 using PlayJam.Character;
+using PlayJam.Sound;
 using PlayJam.Utils;
 using System;
 using System.Collections;
@@ -82,6 +83,7 @@ namespace PlayJam.InGame.StirFriedRice
 
             _gaugeCoroutione = Co_PlayGaugeAnim();
             StartCoroutine(_gaugeCoroutione);
+            SoundManager.Instance.Play(ESoundType.SFX, "StirFriedRice_Idle");
 
             MiniGameManager.OnMiniGamePostStart.Invoke();
         }
@@ -156,6 +158,8 @@ namespace PlayJam.InGame.StirFriedRice
                 // 일단 미니게임 일시정지
                 MiniGameManager.OnMiniGamePause.Invoke();
 
+                SoundManager.Instance.Play(ESoundType.SFX, "StirFriedRice_Click");
+
                 float circleXPos = _trCircle.transform.position.x;
                 if (circleXPos >= -15 && circleXPos <= 15)
                 {
@@ -184,11 +188,11 @@ namespace PlayJam.InGame.StirFriedRice
 
         public override IEnumerator OnFail(Action inCallback)
         {
-            _mainCharacter.PlayAnimator(EAnim.FRIEDRICE_STIR_SUCCESS);
+            _mainCharacter?.PlayAnimator(EAnim.FRIEDRICE_STIR_SUCCESS);
             yield return null;
             float duration = _mainCharacter.CharacterAnimator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
             yield return new WaitForSeconds(duration);
-            _mainCharacter.ChangeEmotion(EEmotion.SAD);
+            _mainCharacter?.ChangeEmotion(EEmotion.SAD);
             yield return new WaitForSeconds(1f);
 
             inCallback?.Invoke();

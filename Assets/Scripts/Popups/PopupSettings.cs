@@ -1,3 +1,4 @@
+using PlayJam.Sound;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -104,6 +105,9 @@ namespace PlayJam.Popup
             _inputName.text = UserDataHelper.Instance.Name;
             _btnNameConfirm.onClick.RemoveAllListeners();
             _btnNameConfirm.onClick.AddListener(OnClickBtnNameConfirm);
+
+            SetBGMUI();
+            SetSFXUI();
         }
 
         private void OnClickBtnCredit()
@@ -124,11 +128,13 @@ namespace PlayJam.Popup
             {
                 UserDataHelper.Instance.IsBGMOn = false;
                 (_imgBGMHandle.transform as RectTransform).anchoredPosition = new Vector3(-48, 0.48f, 0);
+                SoundManager.Instance.Stop(ESoundType.BGM);
             }
             else if (UserDataHelper.Instance.IsBGMOn == false)
             {
                 UserDataHelper.Instance.IsBGMOn = true;
                 (_imgBGMHandle.transform as RectTransform).anchoredPosition = new Vector3(48, 0.48f, 0);
+                SoundManager.Instance.Play(ESoundType.BGM, "MainBGM", true);
             }
         }
 
@@ -138,11 +144,36 @@ namespace PlayJam.Popup
             {
                 UserDataHelper.Instance.IsSFXOn = false;
                 (_imgSFXHandle.transform as RectTransform).anchoredPosition = new Vector3(-48, 0.48f, 0);
+                SoundManager.Instance.Stop(ESoundType.SFX);
             }
             else if (UserDataHelper.Instance.IsSFXOn == false)
             {
                 UserDataHelper.Instance.IsSFXOn = true;
                 (_imgSFXHandle.transform as RectTransform).anchoredPosition = new Vector3(48, 0.48f, 0);
+            }
+        }
+
+        private void SetBGMUI()
+        {
+            if (UserDataHelper.Instance.IsBGMOn == true)
+            {
+                (_imgBGMHandle.transform as RectTransform).anchoredPosition = new Vector3(48, 0.48f, 0);
+            }
+            else if (UserDataHelper.Instance.IsBGMOn == false)
+            {
+                (_imgBGMHandle.transform as RectTransform).anchoredPosition = new Vector3(-48, 0.48f, 0);
+            }
+        }
+
+        private void SetSFXUI()
+        {
+            if (UserDataHelper.Instance.IsSFXOn == true)
+            {
+                (_imgSFXHandle.transform as RectTransform).anchoredPosition = new Vector3(48, 0.48f, 0);
+            }
+            else if (UserDataHelper.Instance.IsSFXOn == false)
+            {
+                (_imgSFXHandle.transform as RectTransform).anchoredPosition = new Vector3(-48, 0.48f, 0);
             }
         }
 

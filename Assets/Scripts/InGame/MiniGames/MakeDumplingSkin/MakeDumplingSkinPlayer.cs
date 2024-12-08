@@ -1,3 +1,4 @@
+using PlayJam.Sound;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -79,6 +80,7 @@ namespace PlayJam.InGame.MakeDumplingSkin
         }
 
         private Vector3 _lastTouchPos;
+        private bool _isPlus = false;
 
         /// <summary>
         /// 
@@ -131,6 +133,23 @@ namespace PlayJam.InGame.MakeDumplingSkin
                 Vector3 curBarPos = new Vector3(prevBarPos.x, Mathf.Clamp(moveDist.y + prevBarPos.y, _barLimitY_Under, _barLimitY_Upper), prevBarPos.z);
 
                 float realMoveDistY = curBarPos.y - prevBarPos.y;
+
+                if (realMoveDistY > 0)
+                {
+                    if (_isPlus == false)
+                    {
+                        _isPlus = true;
+                        SoundManager.Instance.Play(ESoundType.SFX, "MakeDumplingSkin");
+                    }
+                }
+                else
+                {
+                    if (_isPlus == true)
+                    {
+                        _isPlus = false;
+                        SoundManager.Instance.Play(ESoundType.SFX, "MakeDumplingSkin");
+                    }
+                }
 
                 _trBar.localPosition = curBarPos;
 

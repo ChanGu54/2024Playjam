@@ -15,13 +15,14 @@ namespace PlayJam.Character
             {
                 if (_instance == null)
                 {
-                    _instance = FindObjectOfType<CharacterManager>();
+                    _instance = GameObject.Find("CharacterManager")?.GetComponent<CharacterManager>();
+                    _instance.Initialize();
                 }
                 return _instance;
             }
         }
 
-        protected virtual void Awake()
+        public void Initialize()
         {
             if (_instance == null)
             {
@@ -38,30 +39,11 @@ namespace PlayJam.Character
         [SerializeField]
         private MainCharacter _mainCharacterPrefab;
 
-        [SerializeField]
-        private EHat _curHat;
-
-        [SerializeField]
-        private EAddOn _curAddOn;
-
-        [SerializeField]
-        private EBody _curBody;
-
-        [SerializeField]
-        private List<Customer> _customers;
-
         public MainCharacter GetMainCharacter(Transform inParent)
         {
             MainCharacter mainCharacter = Instantiate(_mainCharacterPrefab.gameObject, inParent).GetComponent<MainCharacter>();
-            mainCharacter.Initialize(EEmotion.IDLE, EArm.IDLE, _curBody, _curHat, _curAddOn, true);
+            mainCharacter.Initialize(EEmotion.IDLE, UserDataHelper.Instance.EquippedCostume);
             return mainCharacter;
-        }
-
-        public Customer GetRandomCustomers(Transform inParent)
-        {
-            Customer customerElected = _customers[Random.Range(0, _customers.Count)];
-            Customer customerInstance = Instantiate(customerElected.gameObject, inParent).GetComponent<Customer>();
-            return customerInstance;
         }
     }
 }

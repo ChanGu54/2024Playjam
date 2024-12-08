@@ -6,6 +6,7 @@ using PlayJam.Character;
 using AYellowpaper.SerializedCollections;
 using static PlayJam.InGame.StackHamburger.StackHamburgerData;
 using Unity.Mathematics;
+using PlayJam.Sound;
 
 namespace PlayJam.InGame.StackHamburger
 {
@@ -152,6 +153,8 @@ namespace PlayJam.InGame.StackHamburger
             inIngredient.IsCatched = true;
             inIngredient.Tween.Kill();
             inIngredient.Tween = null;
+
+            SoundManager.Instance.Play(ESoundType.SFX, "StackHamburger");
 
             if (inIngredient.Element == EElement.Trap)
             {

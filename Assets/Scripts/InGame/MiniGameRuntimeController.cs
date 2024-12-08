@@ -1,4 +1,5 @@
 
+using PlayJam.Sound;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -94,9 +95,15 @@ namespace PlayJam.InGame
             });
 
             if (isSuccess == true)
+            {
+                SoundManager.Instance.Play(ESoundType.SFX, "GameClear");
                 StartCoroutine(_pickedMiniGame.MiniGameInstance.OnSuccess(callback));
+            }
             else
+            {
+                SoundManager.Instance.Play(ESoundType.SFX, "GameFail");
                 StartCoroutine(_pickedMiniGame.MiniGameInstance.OnFail(callback));
+            }
         }
 
         /// <summary>

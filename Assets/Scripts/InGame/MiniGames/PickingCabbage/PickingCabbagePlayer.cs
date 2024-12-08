@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using PlayJam.Sound;
 using UnityEngine;
 
 namespace PlayJam.InGame.PickingCabbage
@@ -164,6 +165,8 @@ namespace PlayJam.InGame.PickingCabbage
                             target.SpriteRenderer.DOColor(new Color(1, 1, 1, 0), 1f);
                             _lastTouchPos = Vector3.zero;
 
+                            SoundManager.Instance.Play(ESoundType.SFX, "PickingCabbage");
+
                             if (_targetQueue.Count <= 0)
                             {
                                 StartCoroutine(OnSuccess(() => MiniGameManager.OnMiniGameEnd.Invoke(true)));
@@ -181,6 +184,8 @@ namespace PlayJam.InGame.PickingCabbage
                             target.transform.DOMoveX(200, 1f);
                             target.SpriteRenderer.DOColor(new Color(1, 1, 1, 0), 1f);
                             _lastTouchPos = Vector3.zero;
+
+                            SoundManager.Instance.Play(ESoundType.SFX, "PickingCabbage");
 
                             if (_targetQueue.Count <= 0)
                             {
