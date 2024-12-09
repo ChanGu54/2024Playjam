@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using PlayJam.Character;
 using PlayJam.InGame;
 using PlayJam.Popup;
@@ -118,6 +116,8 @@ namespace PlayJam.World
         {
             if (_isPlaying == true)
                 return;
+
+            PopupManager.Instance.Show<PopupRanking>();
         }
 
         private void OnClickBtnGameList()
