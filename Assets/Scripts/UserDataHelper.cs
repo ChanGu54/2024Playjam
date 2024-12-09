@@ -113,11 +113,11 @@ public class UserDataHelper
     {
         get
         {
-            return PlayerPrefs.GetInt("KEY_BGM", 0) == 0;
+            return PlayerPrefs.GetInt("KEY_SFX", 0) == 0;
         }
         set
         {
-            PlayerPrefs.SetInt("KEY_BGM", value ? 0 : 1);
+            PlayerPrefs.SetInt("KEY_SFX", value ? 0 : 1);
             PlayerPrefs.Save();
         }
     }

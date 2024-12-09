@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2600,7 +2599,7 @@ GameObject:
   - component: {fileID: 357157579}
   - component: {fileID: 357157578}
   m_Layer: 5
-  m_Name: TXT_3RD_ID
+  m_Name: TXT_3RD_NAME
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3239,7 +3238,7 @@ GameObject:
   - component: {fileID: 406854413}
   - component: {fileID: 406854412}
   m_Layer: 5
-  m_Name: TXT_2ND_ID
+  m_Name: TXT_2ND_NAME
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5217,27 +5216,27 @@ MonoBehaviour:
     - Key: 1
       Value:
         TXT_Rank: {fileID: 1082028059}
-        TXT_Id: {fileID: 1484699737}
+        TXT_Name: {fileID: 1484699737}
         TXT_Score: {fileID: 591402947}
     - Key: 2
       Value:
         TXT_Rank: {fileID: 1132764482}
-        TXT_Id: {fileID: 406854412}
+        TXT_Name: {fileID: 406854412}
         TXT_Score: {fileID: 1421213186}
     - Key: 3
       Value:
         TXT_Rank: {fileID: 1356209753}
-        TXT_Id: {fileID: 357157578}
+        TXT_Name: {fileID: 357157578}
         TXT_Score: {fileID: 806328028}
     - Key: 4
       Value:
         TXT_Rank: {fileID: 1821183298}
-        TXT_Id: {fileID: 994036908}
+        TXT_Name: {fileID: 994036908}
         TXT_Score: {fileID: 1387194796}
     - Key: 5
       Value:
         TXT_Rank: {fileID: 509100245}
-        TXT_Id: {fileID: 838652720}
+        TXT_Name: {fileID: 838652720}
         TXT_Score: {fileID: 1874908948}
   _txtMyRank: {fileID: 272334884}
   _btnX: {fileID: 700170795}
@@ -7100,7 +7099,7 @@ GameObject:
   - component: {fileID: 838652721}
   - component: {fileID: 838652720}
   m_Layer: 5
-  m_Name: TXT_5TH_ID
+  m_Name: TXT_5TH_NAME
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7840,7 +7839,7 @@ GameObject:
   - component: {fileID: 994036909}
   - component: {fileID: 994036908}
   m_Layer: 5
-  m_Name: TXT_4TH_ID
+  m_Name: TXT_4TH_NAME
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11773,7 +11772,7 @@ GameObject:
   - component: {fileID: 1484699738}
   - component: {fileID: 1484699737}
   m_Layer: 5
-  m_Name: TXT_1ST_ID
+  m_Name: TXT_1ST_NAME
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

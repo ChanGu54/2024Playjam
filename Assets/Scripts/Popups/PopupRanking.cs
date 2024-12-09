@@ -12,13 +12,13 @@ namespace PlayJam.Popup
     public class Rank
     {
         public TextMeshProUGUI TXT_Rank;
-        public TextMeshProUGUI TXT_Id;
+        public TextMeshProUGUI TXT_Name;
         public TextMeshProUGUI TXT_Score;
 
         public void SetActive(bool inActive)
         {
             TXT_Rank.gameObject.SetActive(inActive);
-            TXT_Id.gameObject.SetActive(inActive);
+            TXT_Name.gameObject.SetActive(inActive);
             TXT_Score.gameObject.SetActive(inActive);
         }
     }
@@ -67,8 +67,8 @@ namespace PlayJam.Popup
                     if (datas.Count >= i + 1)
                     {
                         _rankDic[i + 1].SetActive(true);
-                        _rankDic[i + 1].TXT_Rank.text = (i+1).ToString();
-                        _rankDic[i + 1].TXT_Id.text = datas[i].ID;
+                        _rankDic[i + 1].TXT_Rank.text = i == 0 ? "1ST" : i == 1 ? "2ND" : i == 2 ? "3RD" : $"{(i+1)}TH";
+                        _rankDic[i + 1].TXT_Name.text = datas[i].UserName;
                         _rankDic[i + 1].TXT_Score.text = datas[i].Score.ToString();
                     }
                     else

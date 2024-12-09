@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Cysharp.Threading.Tasks;
 
 namespace PlayJam.Ranking
 {
@@ -18,8 +19,6 @@ namespace PlayJam.Ranking
 
     public class RankingManager : MonoBehaviour
     {
-        private DatabaseReference reference;
-
         private static RankingManager _instance;
 
         public static RankingManager Instance
@@ -39,12 +38,15 @@ namespace PlayJam.Ranking
 
         public void Initialize(Action inCallback)
         {
-            FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
+            FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(async task => {
+
+                // 딜레이 없으면 인스턴스 못불러오네..? 왜지
+                await UniTask.WaitForSeconds(0.1f);
+
                 var dependencyStatus = task.Result;
                 if (dependencyStatus == Firebase.DependencyStatus.Available)
                 {
                     IsInitialized = true;
-                    reference = FirebaseDatabase.DefaultInstance.RootReference;
                 }
                 else
                 {
@@ -61,6 +63,9 @@ namespace PlayJam.Ranking
         // 점수 제출
         public void SubmitScore(string inID, string inUserName, int inScore)
         {
+            if (IsInitialized == false)
+                return;
+
             var data = new Dictionary<string, object>
             {
                 ["ID"] = inID,
@@ -69,13 +74,16 @@ namespace PlayJam.Ranking
                 ["TimeStamp"] = ServerValue.Timestamp
             };
 
-            reference.Child("Rankings").Child(inID).SetValueAsync(data);
+            FirebaseDatabase.DefaultInstance.RootReference.Child("Rankings").Child(inID).SetValueAsync(data);
         }
 
         // 상위 10개 랭킹 가져오기
         public void GetTopRankings(int inNum, System.Action<List<RankingData>> callback)
         {
-            reference.Child("Rankings")
+            if (IsInitialized == false)
+                return;
+
+            FirebaseDatabase.DefaultInstance.RootReference.Child("Rankings")
                 .OrderByChild("Score")
                 .LimitToLast(inNum)
                 .GetValueAsync().ContinueWithOnMainThread(task =>
@@ -106,7 +114,7 @@ namespace PlayJam.Ranking
 
         public void GetMyScore(System.Action<RankingData> callback)
         {
-            reference.Child("Rankings")
+            FirebaseDatabase.DefaultInstance.RootReference.Child("Rankings")
                 .Child(UserDataHelper.Instance.ID)
                 .GetValueAsync().ContinueWithOnMainThread(task =>
                 {
