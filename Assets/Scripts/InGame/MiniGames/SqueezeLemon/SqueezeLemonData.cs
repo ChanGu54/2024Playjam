@@ -9,7 +9,7 @@ namespace PlayJam.InGame.SqueezeLemon
         public int SqueezeCount;
 
         [Header("스테이지 상승에 따른 증가값")]
-        public int IncreaseCountPerStageCount;
+        public float IncreaseCountPerStageCount;
 
         [Header("한 바퀴를 드래그할 때 정상적으로 돌았는지 체크하는 가중치 (테스트용)")]
         public int CheckpointCorrection;

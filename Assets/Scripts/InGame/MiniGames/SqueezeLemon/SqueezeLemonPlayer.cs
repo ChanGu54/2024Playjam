@@ -49,7 +49,7 @@ namespace PlayJam.InGame.SqueezeLemon
             if (_config == null)
                 return;
 
-            int addedSpinCount = _config.IncreaseCountPerStageCount * MiniGameSharedData.Instance.StageCount;
+            int addedSpinCount = (int)(_config.IncreaseCountPerStageCount * MiniGameSharedData.Instance.StageCount);
 
             _requireSpinCount = _config.SqueezeCount + addedSpinCount;
 
