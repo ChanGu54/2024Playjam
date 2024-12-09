@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1065505632024",
+    "project_id": "yoripang-e0f64",
+    "storage_bucket": "yoripang-e0f64.firebasestorage.app",
+    "firebase_url" : "https://yoripang-e0f64-default-rtdb.firebaseio.com/"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1065505632024:android:5013dbe0a56b37d6c5786d",
+        "android_client_info": {
+          "package_name": "com.wemadeplay.yoripang"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDaRCHDgoEoEtJgyNpsWivG3lyyEQKpaE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

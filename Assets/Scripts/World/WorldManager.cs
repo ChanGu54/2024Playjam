@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using PlayJam.Character;
 using PlayJam.InGame;
 using PlayJam.Popup;
+using PlayJam.Ranking;
 using PlayJam.Sound;
 using TMPro;
 using UnityEngine;
@@ -62,6 +63,7 @@ namespace PlayJam.World
             _btnSettings.onClick.AddListener(OnClickBtnSettings);
 
             SoundManager.Instance.Play(ESoundType.BGM, "MainBGM", true);
+            RankingManager.Instance.Initialize(null);
 
             RefreshCoinCount();
             RefreshCostume();

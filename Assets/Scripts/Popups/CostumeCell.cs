@@ -115,6 +115,7 @@ namespace PlayJam.Popup
                 _worldManager.RefreshCoinCount();
                 _popupParent.RefreshCoinCount();
                 UserDataHelper.Instance.AddOwnedCostumes(_costume);
+                _popupParent.RefreshCells();
             }
             else
             {

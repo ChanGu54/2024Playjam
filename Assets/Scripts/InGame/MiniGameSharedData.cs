@@ -1,3 +1,4 @@
+using PlayJam.Ranking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -158,8 +159,35 @@ namespace PlayJam.InGame
 
         public void OnMiniGameQuit()
         {
-            UserDataHelper.Instance.Coin += Mathf.Max(0, 100 * (Instance.StageCount - 1));
+            UserDataHelper.Instance.Coin += Mathf.Max(0, 100 * (StageCount - 1));
             MiniGameManager.WorldManager.RefreshCoinCount();
+
+            if (RankingManager.Instance.IsInitialized == true)
+            {
+                RankingManager.Instance.GetMyScore((data) =>
+                {
+                    if (data.Score < StageCount)
+                    {
+                        RankingManager.Instance.SubmitScore(UserDataHelper.Instance.ID, UserDataHelper.Instance.Name, StageCount);
+                    }
+                });
+            }
+            else
+            {
+                RankingManager.Instance.Initialize(() =>
+                { 
+                    if (RankingManager.Instance.IsInitialized == true)
+                    {
+                        RankingManager.Instance.GetMyScore((data) =>
+                        {
+                            if (data.Score < StageCount)
+                            {
+                                RankingManager.Instance.SubmitScore(UserDataHelper.Instance.ID, UserDataHelper.Instance.Name, StageCount);
+                            }
+                        });
+                    }
+                });
+            }
 
             Clear();
         }
