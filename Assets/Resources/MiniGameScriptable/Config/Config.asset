@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ea9b6e89fbd64429bfd0bd1bd7c529c, type: 3}
   m_Name: Config
   m_EditorClassIdentifier: 
-  PlayTime: 10
+  PlayTime: 15
   InitialHeartCount: 3
-  DecresedPlayTimePerRound: 0.1
-  MinimumPlayTime: 7
+  DecresedPlayTimePerRound: 0.3
+  MinimumPlayTime: 2

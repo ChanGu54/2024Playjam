@@ -15,6 +15,6 @@ MonoBehaviour:
   GameKind: 2
   Food: 2
   InputMethod: 1
-  WhippingCount: 10
+  WhippingCount: 5
   IncreaseCountPerStageCount: 1
   CheckpointCorrection: 40

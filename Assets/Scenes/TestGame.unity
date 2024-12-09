@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222633c099c85467683eaabc94ac5c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainCharacterPrefab: {fileID: 0}
+  _mainCharacterPrefab: {fileID: 1352235056}
 --- !u!4 &104080379
 Transform:
   m_ObjectHideFlags: 0
@@ -2326,7 +2326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isTesting: 1
-  _testTarget: 4
+  _testTarget: 1
   _miniGameConfig: {fileID: 11400000, guid: 2cb5eff4084424e008039833f0f2ae56, type: 2}
   _miniGames:
   - {fileID: 11400000, guid: a15f47244fb16944a94849db5c570f77, type: 2}

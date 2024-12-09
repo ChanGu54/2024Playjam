@@ -18,31 +18,31 @@ MonoBehaviour:
   Targets:
   - Element: 0
     AppeaeredStage: 1
-    CuttingMinCount: 3
-    CuttingMaxCount: 6
-    CuttingCount: 5
-  - Element: 1
-    AppeaeredStage: 3
-    CuttingMinCount: 9
-    CuttingMaxCount: 12
+    CuttingMinCount: 5
+    CuttingMaxCount: 8
     CuttingCount: 7
+  - Element: 1
+    AppeaeredStage: 11
+    CuttingMinCount: 10
+    CuttingMaxCount: 15
+    CuttingCount: 11
   - Element: 2
-    AppeaeredStage: 6
+    AppeaeredStage: 21
     CuttingMinCount: 15
-    CuttingMaxCount: 18
-    CuttingCount: 10
+    CuttingMaxCount: 20
+    CuttingCount: 15
   - Element: 3
-    AppeaeredStage: 9
+    AppeaeredStage: 31
     CuttingMinCount: 21
     CuttingMaxCount: 24
-    CuttingCount: 12
+    CuttingCount: 22
   - Element: 4
-    AppeaeredStage: 12
+    AppeaeredStage: 41
     CuttingMinCount: 27
     CuttingMaxCount: 30
-    CuttingCount: 15
+    CuttingCount: 29
   - Element: 5
-    AppeaeredStage: 15
-    CuttingMinCount: 33
-    CuttingMaxCount: 36
-    CuttingCount: 18
+    AppeaeredStage: 51
+    CuttingMinCount: 40
+    CuttingMaxCount: 70
+    CuttingCount: 32

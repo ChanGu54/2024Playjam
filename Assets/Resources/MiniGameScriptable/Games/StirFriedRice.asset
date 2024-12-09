@@ -15,6 +15,6 @@ MonoBehaviour:
   GameKind: 4
   Food: 4
   InputMethod: 0
-  CircleMinSpeed: 40
-  CircleMaxSpeed: 160
-  SpeedIncreaseWeight: 20
+  CircleMinSpeed: 60
+  CircleMaxSpeed: 140
+  SpeedIncreaseWeight: 10

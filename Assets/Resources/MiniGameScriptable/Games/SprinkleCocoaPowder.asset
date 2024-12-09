@@ -15,7 +15,8 @@ MonoBehaviour:
   GameKind: 8
   Food: 8
   InputMethod: 0
-  ClearScore: 10
-  MaxScorePerTouch: 1
+  ClearScore: 5
+  ClearScoreWeight: 1
+  MaxScorePerTouch: 2
   MinScorePerTouch: 0.5
   MaxRotationDegree: 15

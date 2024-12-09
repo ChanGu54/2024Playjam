@@ -15,6 +15,6 @@ MonoBehaviour:
   GameKind: 9
   Food: 9
   InputMethod: 1
-  SqueezeCount: 10
-  IncreaseCountPerStageCount: 1
+  SqueezeCount: 5
+  IncreaseCountPerStageCount: 0.4
   CheckpointCorrection: 40
