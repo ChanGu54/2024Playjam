@@ -62,7 +62,6 @@ Thumbs.db
 *.sublime-workspace
 .settings/launch.json
 .settings/settings.json
-.gitattributes
 *.orig
 *.orig.meta
 *.cache
