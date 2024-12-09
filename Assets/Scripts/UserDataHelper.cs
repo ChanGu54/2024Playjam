@@ -209,7 +209,7 @@ public class UserDataHelper
             }
         }
 
-        _ownedCostumes.Append(inCostume);
+        _ownedCostumes = _ownedCostumes.Append(inCostume).ToArray();
         int[] ownedCostumesInt = Array.ConvertAll(_ownedCostumes, e => (int)e);
         PlayerPrefs.SetString("KEY_OwnedCostumes", string.Join(',', ownedCostumesInt));
         PlayerPrefs.Save();

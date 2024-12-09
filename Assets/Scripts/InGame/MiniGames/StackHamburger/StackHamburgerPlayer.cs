@@ -189,6 +189,8 @@ namespace PlayJam.InGame.StackHamburger
 
             yield return null;
             _mainCharacter.PlayAnimator(EAnim.HAMBURGER);
+            _mainCharacter.SetActiveEar(false);
+            _mainCharacter.ChangeHat(EHat.IDLE);
 
             yield return new WaitForSeconds(0.5f);
 

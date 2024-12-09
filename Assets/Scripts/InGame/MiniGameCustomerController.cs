@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
@@ -78,15 +79,7 @@ namespace PlayJam.InGame
                 float moveTime = durationPerDist * Mathf.Abs(moveDist);
                 float waitTime = i == 0 ? 0 : maxDuration - moveTime;
 
-                StartCoroutine(TimerCoroutine(waitTime, () =>
-                {
-                    for (int j = 0; j < (moveTime / walkAnimDuration) / 2f; j++)
-                    {
-                        StartCoroutine(TimerCoroutine(walkAnimDuration * (j * 2), () => customerInstance.transform.DOLocalMoveY(25, walkAnimDuration).SetEase(Ease.Linear)));
-                        StartCoroutine(TimerCoroutine(walkAnimDuration * (j * 2 + 1), () => customerInstance.transform.DOLocalMoveY(0, walkAnimDuration).SetEase(Ease.Linear)));
-                    }
-                    customerInstance.transform.DOLocalMoveX(endX, moveTime).SetEase(Ease.Linear);
-                }));
+                StartCoroutine(Co_MoveLocal(customerInstance.transform, customerInstance.transform.localPosition, new Vector3(endX, customerInstance.transform.localPosition.y, customerInstance.transform.localPosition.z), waitTime, moveTime, (int)(moveTime / walkAnimDuration), 25));
 
                 _customerList.Add(customerInstance);
             }
@@ -143,32 +136,18 @@ namespace PlayJam.InGame
 
             for (int i = 0; i < _customerList.Count; i++)
             {
-                for (int j = 0; j < (moveTimePerCustomerPos / walkAnimDuration) / 2f; j++)
-                {
-                    int cachedI = i;
-
-                    StartCoroutine(TimerCoroutine(walkAnimDuration * (j * 2),
-                        () =>
-                        _customerList[cachedI].transform.DOLocalMoveY(25, walkAnimDuration).SetEase(Ease.Linear)
-                        ));
-                    StartCoroutine(TimerCoroutine(walkAnimDuration * (j * 2 + 1),
-                        () =>
-                        _customerList[cachedI].transform.DOLocalMoveY(0, walkAnimDuration).SetEase(Ease.Linear)
-                        ));
-                }
-
                 if (i == 0 || i == _customerList.Count - 1)
-                    _customerList[i].transform.DOLocalMoveX(_customerList[i].transform.localPosition.x - 200, moveTimePerCustomerPos).SetEase(Ease.Linear);
+                    StartCoroutine(Co_MoveLocal(_customerList[i].transform, _customerList[i].transform.localPosition, new Vector3(_customerList[i].transform.localPosition.x - 200, _customerList[i].transform.localPosition.y, _customerList[i].transform.localPosition.z), 0, moveTimePerCustomerPos, (int)(moveTimePerCustomerPos / walkAnimDuration), 25));
                 else
-                    _customerList[i].transform.DOLocalMoveX(_customerList[i].transform.localPosition.x - 140, moveTimePerCustomerPos).SetEase(Ease.Linear);
+                    StartCoroutine(Co_MoveLocal(_customerList[i].transform, _customerList[i].transform.localPosition, new Vector3(_customerList[i].transform.localPosition.x - 140, _customerList[i].transform.localPosition.y, _customerList[i].transform.localPosition.z), 0, moveTimePerCustomerPos, (int)(moveTimePerCustomerPos / walkAnimDuration), 25));
             }
 
             if (isSuccess == true && _carrotList.Count <= 20 && _carrotPrefab != null)
             {
                 GameObject carrot = Instantiate(_carrotPrefab, _carrotPrefab.transform.parent);
                 carrot.SetActive(true);
-                (carrot.transform as RectTransform).anchoredPosition = new Vector2(Random.Range(-5f, 35f), Random.Range(0, 10f));
-                carrot.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+                (carrot.transform as RectTransform).anchoredPosition = new Vector2(UnityEngine.Random.Range(-5f, 35f), UnityEngine.Random.Range(0, 10f));
+                carrot.transform.rotation = Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360));
                 _carrotList.Add(carrot);
             }
         }
@@ -176,49 +155,62 @@ namespace PlayJam.InGame
         private void OnMiniGameQuit()
         {
             float fixedDuration = 1f;
-            float walkAnimDuration = 1/6f;
-
-            List<WaitForSignal> flags = new List<WaitForSignal>();
             
             for (int i = 0; i < _customerList.Count; i++)
             {
-                for (int j = 0; j < (fixedDuration / walkAnimDuration) / 2f; j++)
-                {
-                    int cachedI = i;
-
-                    WaitForSignal new1 = new();
-                    WaitForSignal new2 = new();
-
-                    flags.Add(new1);
-                    flags.Add(new2);
-
-                    StartCoroutine(TimerCoroutine(walkAnimDuration * (j * 2),
-                        () =>
-                        _customerList[cachedI].transform.DOLocalMoveY(25, walkAnimDuration).SetEase(Ease.Linear).OnComplete(new1.Signal)
-                        )) ;
-                    StartCoroutine(TimerCoroutine(walkAnimDuration * (j * 2 + 1),
-                        () =>
-                        _customerList[cachedI].transform.DOLocalMoveY(0, walkAnimDuration).SetEase(Ease.Linear).OnComplete(new2.Signal)
-                        ));
-                }
-
-                WaitForSignal new3 = new();
-                flags.Add(new3);
-
-                _customerList[i].transform.DOLocalMoveX(-420, fixedDuration).SetEase(Ease.Linear).OnComplete(new3.Signal);
+                _customerList[i].transform.DOLocalMoveX(-600, fixedDuration).SetEase(Ease.Linear);
             }
 
-            UniTask.Create(async () =>
+            StartCoroutine(TimerCoroutine(fixedDuration, () =>
             {
-                await UniTask.WaitUntil(() => flags.TrueForAll(y => y.HasSignal()));
                 Clear();
-            });
+            }));
         }
 
         private IEnumerator TimerCoroutine(float duration, System.Action onComplete)
         {
             yield return new WaitForSeconds(duration);
             onComplete?.Invoke();
+        }
+
+        private IEnumerator Co_MoveLocal(Transform inTransform, Vector3 inPrevPos, Vector3 inCurPos, float inReservedDuration, float inDuration, int inBounceCount, int inBounceHeight)
+        {
+            inTransform.localPosition = inPrevPos;
+
+            float time = 0;
+
+            while (inReservedDuration != 0 && time / inReservedDuration < 1)
+            {
+                time += Time.deltaTime;
+                yield return null;
+            }
+
+            time -= inReservedDuration;
+            float cachedBounceWeight = 0;
+            float bounceWeight = 0;
+            bool isAscending = true;
+
+            while (inDuration != 0 && time / inDuration < 1)
+            {
+                bounceWeight = ((time / inDuration) % (1f / inBounceCount)) * inBounceCount;
+                if (cachedBounceWeight > bounceWeight)
+                {
+                    isAscending = !isAscending;
+                }
+
+                cachedBounceWeight = bounceWeight;
+
+                if (isAscending == false)
+                {
+                    bounceWeight = 1 - bounceWeight;
+                }
+
+                inTransform.localPosition = Vector3.Lerp(inPrevPos, inCurPos, time / inDuration) + Vector3.up * inBounceHeight * bounceWeight;
+                time += Time.deltaTime;
+                yield return null;
+            }
+
+            inTransform.localPosition = inCurPos;
         }
     }
 }

@@ -46,6 +46,8 @@ namespace PlayJam.Popup
             else
                 RefreshCells();
 
+            _cellRoot.offsetMin = new Vector2(0, _cellRoot.offsetMin.y);
+
             _btnX.onClick.RemoveAllListeners();
             _btnX.onClick.AddListener(PopupManager.Instance.Exit<PopupCostume>);
 
@@ -77,8 +79,6 @@ namespace PlayJam.Popup
             {
                 _costumeCellInstantiated[i].Initialize(ownedCostume, _allCostume[i]);
             }
-
-            _cellRoot.offsetMin = new Vector2(0, _cellRoot.offsetMin.y);
         }
 
         public void RefreshAniCostume()
