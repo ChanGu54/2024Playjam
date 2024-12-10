@@ -17,6 +17,9 @@ namespace PlayJam.InGame.MakeDumplingSkin
         private Transform _trBar;
 
         [SerializeField]
+        private SpriteRenderer _rendBar;
+
+        [SerializeField]
         private SpriteRenderer _rendSkin;
 
 
@@ -58,6 +61,7 @@ namespace PlayJam.InGame.MakeDumplingSkin
 
             _curMoveDistance = 0;
             _objectiveMoveDistance = _config.ClearDistance + _config.ClearDistanceWeight * MiniGameSharedData.Instance.StageCount;
+            _rendBar.size = Vector2.Lerp(new Vector2(600, 121), new Vector2(200, 121), Mathf.Min(1, 1 / 50f * MiniGameSharedData.Instance.StageCount));
         }
 
         /// <summary>
@@ -67,7 +71,7 @@ namespace PlayJam.InGame.MakeDumplingSkin
         public override IEnumerator OnStart()
         {
             _rendSkin.size = Vector2.one * _startSkinSize;
-            _trBar.localPosition = new Vector3(0, (_barLimitY_Under + _barLimitY_Upper) / 2f, 1);
+            _trBar.localPosition = new Vector3(0, (_barLimitY_Under + _barLimitY_Upper) / 2f, -1);
 
             yield return new WaitForSeconds(0.5f);
 

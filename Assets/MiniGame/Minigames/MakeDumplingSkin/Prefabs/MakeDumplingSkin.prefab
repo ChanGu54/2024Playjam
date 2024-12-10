@@ -134,6 +134,7 @@ MonoBehaviour:
   IsPlaying: 0
   _config: {fileID: 0}
   _trBar: {fileID: 8166431925872152450}
+  _rendBar: {fileID: 4829719818493412305}
   _rendSkin: {fileID: 7802235061117243023}
 --- !u!1 &5211922316587234754
 GameObject:
@@ -212,8 +213,8 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 645, y: 123}
+  m_DrawMode: 1
+  m_Size: {x: 600, y: 121}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
