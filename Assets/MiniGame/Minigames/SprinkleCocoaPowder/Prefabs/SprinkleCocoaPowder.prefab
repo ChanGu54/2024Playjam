@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlaying: 0
+  Hand: {fileID: 0}
+  HandAnimator: {fileID: 0}
   _touchCollider: {fileID: 3530539436365238000}
   _touchSpriteRenderer: {fileID: 1657037342259875747}
   _powderPrefab: {fileID: 6579149661397263028}

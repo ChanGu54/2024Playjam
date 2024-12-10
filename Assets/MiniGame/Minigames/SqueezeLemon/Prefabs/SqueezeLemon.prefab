@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlaying: 0
+  Hand: {fileID: 0}
+  HandAnimator: {fileID: 0}
   _trLemonLiquid: {fileID: 6462623082343371530}
   _trLemon: {fileID: 2065516501975416340}
 --- !u!1 &4590286620558489475

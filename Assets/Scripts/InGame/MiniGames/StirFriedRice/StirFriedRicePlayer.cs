@@ -84,9 +84,19 @@ namespace PlayJam.InGame.StirFriedRice
 
             _gaugeCoroutione = Co_PlayGaugeAnim();
             StartCoroutine(_gaugeCoroutione);
-            SoundManager.Instance.Play(ESoundType.SFX, "StirFriedRice_Idle");
+            SoundManager.Instance.Play(ESoundType.SFX, "StirFriedRice_Idle", true);
 
             MiniGameManager.OnMiniGamePostStart.Invoke();
+
+            if (MiniGameSharedData.Instance.StageCount <= MiniGameSharedData.Instance.AllMiniGameDatas.Count)
+            {
+                yield return new WaitForSeconds(1f);
+                Hand.transform.SetParent(transform);
+                yield return null;
+                HandAnimator.Play("Touch");
+                Hand.transform.localScale = Vector3.one;
+                Hand.transform.localPosition = new Vector3(200, -300, 0);
+            }
         }
 
         /// <summary>

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using PlayJam.Sound;
 using System.Collections;
 using System.Collections.Generic;
@@ -76,6 +77,17 @@ namespace PlayJam.InGame.MakeDumplingSkin
             yield return new WaitForSeconds(0.5f);
 
             MiniGameManager.OnMiniGamePostStart.Invoke();
+
+            if (MiniGameSharedData.Instance.StageCount <= MiniGameSharedData.Instance.AllMiniGameDatas.Count)
+            {
+                yield return new WaitForSeconds(1f);
+                Hand.transform.SetParent(transform);
+                yield return null;
+                HandAnimator.Play("Drag");
+                Hand.transform.localScale = Vector3.one;
+                Hand.transform.localPosition = new Vector3(0, 0, 0);
+                Hand.transform.DOLocalMoveY(-300, 1f);
+            }
         }
 
         public override void OnPostStart()

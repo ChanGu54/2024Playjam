@@ -156,6 +156,8 @@ namespace PlayJam.InGame.StackHamburger
 
             SoundManager.Instance.Play(ESoundType.SFX, "StackHamburger");
 
+            _catchList.Add(inIngredient.Element);
+
             if (inIngredient.Element == EElement.Trap)
             {
                 // 일단 미니게임 일시정지
@@ -165,8 +167,6 @@ namespace PlayJam.InGame.StackHamburger
                 StartCoroutine(OnFail(() => MiniGameManager.OnMiniGameEnd.Invoke(false)));
                 return;
             }
-
-            _catchList.Add(inIngredient.Element);
 
             if (_catchList.Count == _ingredientObjDic.Count - 1)
             {
@@ -195,6 +195,17 @@ namespace PlayJam.InGame.StackHamburger
             yield return new WaitForSeconds(0.5f);
 
             MiniGameManager.OnMiniGamePostStart.Invoke();
+
+            if (MiniGameSharedData.Instance.StageCount <= MiniGameSharedData.Instance.AllMiniGameDatas.Count)
+            {
+                yield return new WaitForSeconds(1f);
+                Hand.transform.SetParent(transform);
+                yield return null;
+                HandAnimator.Play("Drag");
+                Hand.transform.localScale = Vector3.one;
+                Hand.transform.localPosition = new Vector3(-200, -300, 0);
+                Hand.transform.DOLocalMoveX(200, 1f);
+            }
         }
 
         public override void OnPostStart()

@@ -54,8 +54,6 @@ namespace PlayJam.World
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
 
-            UserDataHelper.Instance.Coin = 10000;
-
             _btnStart.onClick.AddListener(OnClickBtnStart);
             _btnRank.onClick.AddListener(OnClickBtnRank);
             _btnGameList.onClick.AddListener(OnClickBtnGameList);

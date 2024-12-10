@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlaying: 0
+  Hand: {fileID: 0}
+  HandAnimator: {fileID: 0}
   _trCharacterBasePos: {fileID: 879819473114468272}
   _config: {fileID: 0}
   _trCircle: {fileID: 8469222587090056440}

@@ -94,6 +94,26 @@ namespace PlayJam.InGame.PickingCabbage
             yield return new WaitForSeconds(0.5f);
 
             MiniGameManager.OnMiniGamePostStart.Invoke();
+
+            if (MiniGameSharedData.Instance.StageCount <= MiniGameSharedData.Instance.AllMiniGameDatas.Count)
+            {
+                Transform handClone = Instantiate(Hand.gameObject).transform;
+                Animator handAnimatorClone = handClone.gameObject.GetComponent<Animator>();
+
+                yield return new WaitForSeconds(1f);
+                Hand.transform.SetParent(transform);
+                handClone.transform.SetParent(transform);
+                yield return null;
+                HandAnimator.Play("Drag");
+                handAnimatorClone.Play("Drag");
+                Hand.transform.localScale = Vector3.one;
+                Hand.transform.localPosition = new Vector3(70, -180, 0);
+                Hand.transform.DOLocalMoveX(200, 1f);
+
+                handClone.transform.localScale = Vector3.one;
+                handClone.transform.localPosition = new Vector3(-70, -180, 0);
+                handClone.transform.DOLocalMoveX(-200, 1f).OnComplete(() => Destroy(handClone.gameObject));
+            }
         }
 
         public override void OnPostStart()

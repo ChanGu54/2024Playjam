@@ -132,6 +132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlaying: 0
+  Hand: {fileID: 0}
+  HandAnimator: {fileID: 0}
   _config: {fileID: 0}
   _trBar: {fileID: 8166431925872152450}
   _rendBar: {fileID: 4829719818493412305}

@@ -122,6 +122,21 @@ namespace PlayJam.InGame.CookTakoyaki
         {
             yield return null;
             MiniGameManager.OnMiniGamePostStart.Invoke();
+
+            if (MiniGameSharedData.Instance.StageCount <= MiniGameSharedData.Instance.AllMiniGameDatas.Count)
+            {
+                yield return new WaitForSeconds(1f);
+
+                GameObject go = _takoyakiObjs.Where(x => x.activeSelf).FirstOrDefault();
+                if (go == null)
+                    yield break;
+
+                Hand.transform.SetParent(transform);
+                yield return null;
+                Hand.transform.position = go.transform.position;
+                HandAnimator.Play("Touch");
+                Hand.transform.localScale = Vector3.one;
+            }
         }
 
         /// <summary>

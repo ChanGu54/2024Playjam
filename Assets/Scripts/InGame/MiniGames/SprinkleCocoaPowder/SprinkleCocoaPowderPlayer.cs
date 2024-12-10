@@ -89,6 +89,27 @@ namespace PlayJam.InGame.SprinkleCocoaPowder
         {
             yield return null;
             MiniGameManager.OnMiniGamePostStart.Invoke();
+
+            if (MiniGameSharedData.Instance.StageCount <= MiniGameSharedData.Instance.AllMiniGameDatas.Count)
+            {
+                Transform handClone = Instantiate(Hand.gameObject).transform;
+                Animator handAnimatorClone = handClone.gameObject.GetComponent<Animator>();
+
+                yield return new WaitForSeconds(1f);
+                Hand.transform.SetParent(transform);
+                handClone.transform.SetParent(transform);
+                yield return null;
+                HandAnimator.Play("Touch");
+                Hand.transform.localScale = Vector3.one;
+                Hand.transform.localPosition = new Vector3(100, -120, 0);
+
+                handAnimatorClone.Play("Touch");
+                handClone.transform.localScale = Vector3.one;
+                handClone.transform.localPosition = new Vector3(-100, -120, 0);
+
+                yield return new WaitForSeconds(1f);
+                Destroy(handClone.gameObject);
+            }
         }
 
         /// <summary>

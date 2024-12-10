@@ -614,6 +614,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlaying: 0
+  Hand: {fileID: 0}
+  HandAnimator: {fileID: 0}
   _knifeAnimator: {fileID: 4952537958427259028}
   _targetAnimator: {fileID: 1500786687605359821}
   _cuttingPrefabs:

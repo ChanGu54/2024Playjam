@@ -1785,6 +1785,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlaying: 0
+  Hand: {fileID: 0}
+  HandAnimator: {fileID: 0}
   _touchPoints:
   - {fileID: 5436290697372534175}
   - {fileID: 7200901631153819474}

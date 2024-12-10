@@ -101,6 +101,17 @@ namespace PlayJam.InGame.Whipping
             yield return new WaitForSeconds(0.5f);
 
             MiniGameManager.OnMiniGamePostStart.Invoke();
+
+            if (MiniGameSharedData.Instance.StageCount <= MiniGameSharedData.Instance.AllMiniGameDatas.Count)
+            {
+                yield return new WaitForSeconds(1f);
+                Hand.transform.SetParent(transform);
+                yield return null;
+                HandAnimator.Play("Drag");
+                Hand.transform.localScale = Vector3.one;
+                Hand.transform.localPosition = new Vector3(0, -350, 0);
+                StartCoroutine(Co_DrawCircle(Hand.transform, 150, 1));
+            }
         }
 
         /// <summary>

@@ -59,11 +59,11 @@ namespace PlayJam.Popup
             {
                 if (UserDataHelper.Instance.EquippedCostume == _costume)
                 {
-                    _state = CostumeCellState.Equip;
+                    _state = CostumeCellState.UnEquip;
                 }
                 else
                 {
-                    _state = CostumeCellState.UnEquip;
+                    _state = CostumeCellState.Equip;
                 }
             }
             else
@@ -115,6 +115,8 @@ namespace PlayJam.Popup
                 _worldManager.RefreshCoinCount();
                 _popupParent.RefreshCoinCount();
                 UserDataHelper.Instance.AddOwnedCostumes(_costume);
+                UserDataHelper.Instance.EquippedCostume = _costume;
+                _popupParent.RefreshAniCostume();
                 _popupParent.RefreshCells();
             }
             else
@@ -141,12 +143,12 @@ namespace PlayJam.Popup
             if (_state == CostumeCellState.Equip)
             {
                 _state = CostumeCellState.UnEquip;
-                UserDataHelper.Instance.EquippedCostume = ECostume.IDLE;
+                UserDataHelper.Instance.EquippedCostume = _costume;
             }
             else
             {
                 _state = CostumeCellState.Equip;
-                UserDataHelper.Instance.EquippedCostume = _costume;
+                UserDataHelper.Instance.EquippedCostume = ECostume.IDLE;
             }
 
             _popupParent.RefreshAniCostume();

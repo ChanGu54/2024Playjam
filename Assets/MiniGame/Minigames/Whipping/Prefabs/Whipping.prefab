@@ -758,6 +758,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlaying: 0
+  Hand: {fileID: 0}
+  HandAnimator: {fileID: 0}
   _trWhip: {fileID: 8372115416593666136}
   _trWhipCenter: {fileID: 8958707630839267344}
   _whipLevelObjs:

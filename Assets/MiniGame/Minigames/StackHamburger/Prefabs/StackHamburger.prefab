@@ -1115,6 +1115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPlaying: 0
+  Hand: {fileID: 0}
+  HandAnimator: {fileID: 0}
   _mainCharacter: {fileID: 0}
   _config: {fileID: 0}
   _ingredientObjDic:
