@@ -142,12 +142,30 @@ namespace PlayJam.InGame
                     StartCoroutine(Co_MoveLocal(_customerList[i].transform, _customerList[i].transform.localPosition, new Vector3(_customerList[i].transform.localPosition.x - 140, _customerList[i].transform.localPosition.y, _customerList[i].transform.localPosition.z), 0, moveTimePerCustomerPos, (int)(moveTimePerCustomerPos / walkAnimDuration), 25));
             }
 
-            if (isSuccess == true && _carrotList.Count <= 20 && _carrotPrefab != null)
+            if (isSuccess == true && _carrotPrefab != null && isSuccess == true)
             {
+                float xWeight = 560f / 14f;
+                float yWeight = 20f;
+
+                float xCal = (xWeight * (MiniGameSharedData.Instance.StageCount - 2));
+                float yCal = (int)((xWeight * (MiniGameSharedData.Instance.StageCount - 2)) / 560.001f);
+
+                float xPos = xCal % 561 - 280;
+                float yPos = yCal * yWeight + 446.5f;
+
+                if (yCal % 2 == 1)
+                {
+                    xPos -= xWeight / 2;
+                }
+
+                if (yCal > 3)
+                {
+                    return;
+                }
+
                 GameObject carrot = Instantiate(_carrotPrefab, _carrotPrefab.transform.parent);
                 carrot.SetActive(true);
-                (carrot.transform as RectTransform).anchoredPosition = new Vector2(UnityEngine.Random.Range(-5f, 35f), UnityEngine.Random.Range(0, 10f));
-                carrot.transform.rotation = Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360));
+                (carrot.transform as RectTransform).anchoredPosition = new Vector2(xPos, yPos);
                 _carrotList.Add(carrot);
             }
         }
