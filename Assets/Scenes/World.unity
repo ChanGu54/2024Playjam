@@ -1493,6 +1493,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 427799860}
     m_Modifications:
     - target: {fileID: 7845591362918063867, guid: 314a0f7934fbc4cc5b2cc638476fb440, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7845591362918063867, guid: 314a0f7934fbc4cc5b2cc638476fb440, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -3819,8 +3823,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4288859110
+  m_fontColor: {r: 0.90196085, g: 0.7960785, b: 0.63529414, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3895,6 +3899,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 104080379}
     m_Modifications:
+    - target: {fileID: 7845591362918063867, guid: 314a0f7934fbc4cc5b2cc638476fb440, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7845591362918063867, guid: 314a0f7934fbc4cc5b2cc638476fb440, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3481
@@ -4250,6 +4258,10 @@ PrefabInstance:
     - target: {fileID: 7645160877678677720, guid: 314a0f7934fbc4cc5b2cc638476fb440, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7845591362918063867, guid: 314a0f7934fbc4cc5b2cc638476fb440, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7845591362918063867, guid: 314a0f7934fbc4cc5b2cc638476fb440, type: 3}
       propertyPath: m_LocalPosition.x

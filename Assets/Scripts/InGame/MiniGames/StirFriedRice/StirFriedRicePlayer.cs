@@ -70,6 +70,7 @@ namespace PlayJam.InGame.StirFriedRice
             _mainCharacter.ChangeAddOn(EAddOn.PAN);
             _mainCharacter.PlayAnimator(EAnim.IDLE);
             _mainCharacter.transform.localPosition = Vector3.zero;
+            _mainCharacter.transform.localScale = new Vector3(-1, 1, 1);
 
             _circleSpeed = UnityEngine.Random.Range(_config.CircleMinSpeed + _config.SpeedIncreaseWeight * MiniGameSharedData.Instance.StageCount, _config.CircleMaxSpeed);
         }
