@@ -106,6 +106,12 @@ namespace PlayJam.InGame.StackHamburger
                 _ingredientDatas.Insert(insertIndex, trapData);
                 _ingredients.Add(_ingredientObjDic[trapData.Element]);
             }
+            else
+            {
+                // 함정 오브젝트를 우주로 보내버립니다
+                _ingredientObjDic[trapData.Element].Initialize();
+                _ingredientObjDic[trapData.Element].transform.position = new Vector3(0, 5000, 0);
+            }
 
             for (int i = 0; i < _ingredients.Count; i++)
             {
